@@ -1,0 +1,44 @@
+﻿Medio Interactive CSS framework
+Version: 2.1.0
+Author: Václav Vracovský (http://www.medio.cz)
+Date: October 2013
+
+
+ _____                  _                               _
+|  __ \                (_)                             | |
+| |__) |___  __ _ _   _ _ _ __ ___ _ __ ___   ___ _ __ | |_ ___
+|  _  // _ \/ _` | | | | | '__/ _ \ '_ ` _ \ / _ \ '_ \| __/ __|
+| | \ \  __/ (_| | |_| | | | |  __/ | | | | |  __/ | | | |_\__ \
+|_|  \_\___|\__, |\__,_|_|_|  \___|_| |_| |_|\___|_| |_|\__|___/
+               | |
+               |_|
+
+PHP 5.4.0+
+http://www.php.net/
+
+nodeJs
+http://nodejs.org/
+
+Grunt
+http://gruntjs.com/
+
+ _    _
+| |  | |
+| |  | |___  __ _  __ _  ___
+| |  | / __|/ _` |/ _` |/ _ \
+| |__| \__ \ (_| | (_| |  __/
+ \____/|___/\__,_|\__, |\___|
+                   __/ |
+                  |___/
+
+1. For development, run
+$ grunt
+
+2. Create templates in "php" folder, write CSS/JS in the "html/project/_ui" folder.
+
+3. When you're done, run:
+$ grunt export
+
+4. All HTML templates and CSS/JS are now ready inside the "html/project" folder.
+
+That's all.
