@@ -24,10 +24,10 @@ if (isset ($export)): $path = ''; endif;
 		#accessibility-nav, .hide { position: absolute; top: -999em; left: -999em; height: 1px; width: 1px; }
 		* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 		html,
-		body { min-height: 100%; }
+		body { height: 100%; }
 		html { font-size: 100%; }
 		body { font: 18px/1.6 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
-		background-color: #fff; color: #0c0800;
+		background: #f9f3e3; color: #0c0800;
 		}
 		hr { display: none; }
 		strong { font-weight: bold; }
@@ -38,14 +38,14 @@ if (isset ($export)): $path = ''; endif;
 		li { list-style: none; }
 		abbr, acronym { border-bottom: 1px dotted #999; cursor: help; }
 		input, textarea, select { font-family: "Trebuchet MS", "Geneva CE", lucida, sans-serif; }
-		a, a:visited { color: #666; text-decoration: underline; }
+		a, a:visited { color: #f05828; text-decoration: underline; }
 		a:hover, a:active { text-decoration: none; }
 		a:focus { outline: 0; }
 		h1,h2,h3,h4 { font-family: Impact, Charcoal, fantasy; font-weight: normal; letter-spacing: 10px; text-transform: uppercase;
 		text-shadow: 1px 1px 0 #729c76, -1px -1px 0 #333, -2px -2px 0 #333, -3px -3px 0 #333, -4px -4px 0 #333;
 		color: #8dce93;
 		}
-		h1 { font-size: 4em; line-height: 1; margin-bottom: 0.5em; }
+		h1 { font-size: 4em; line-height: 1; }
 		h1 a,
 		a.dont-edit { padding-left: 1ex; font-family: "Trebuchet MS", "Geneva CE", lucida, sans-serif; font-weight: normal; text-transform: none;
 		font-size: small; letter-spacing: 0; text-shadow: none; }
@@ -55,21 +55,22 @@ if (isset ($export)): $path = ''; endif;
 		p { margin-bottom: 1em; }
 		em { border-bottom: 1px dotted #999; font-style: italic; }
 
-		.container { position: relative; max-width: 1280px; margin: 0 auto; padding: 2em; }
-		#header { position: relative; margin: 0 0 1em; padding: 1em 0 .5em; }
+		.container { position: relative; height: 100%; padding-right: 330px; }
+		#header { position: relative; padding: 2em 2em 1em; }
 
 		#content,
-		#sidebar { position: relative; }
-		#content { float: left; width: 65%; padding: 0 2% 1em 0; }
-		#sidebar { float: right; width: 35%; padding: 1em; }
-		#footer { clear: both; padding: 3em 0 0; }
+		#sidebar { padding: 2em; }
+		#content { position: relative; float: left; min-width: 500px; max-width: 800px; }
+		#sidebar { position: fixed; right: 0; top: 0; width: 300px; height: 100%; border-left: 10px solid #ef9b2d;
+		box-shadow: -10px 0 0 0 #828282, -20px 0 0 0 #882f2f; background: #f05828; color: #f9f3e3; }
+		#footer { clear: both; padding: 2em; }
 
 		.template-info { width: 100%; margin: 0 0 3em; }
 		.template-info:last-child { margin: 0 0 1em; }
 		.template-info tr:nth-child(even) { background: rgba(114,156,118,.1); }
 		.template-info tbody tr:hover { background: rgba(114,156,118,.1); }
 		.template-info td,
-		.template-info th { padding: 1ex .5ex 1ex 0; border-bottom: 2px dashed #333; }
+		.template-info th { padding: 1ex 1em 1ex 0; border-bottom: 2px dashed #333; }
 		.template-info th { font-size: 12px; }
 		.template-info h4 { margin: 0; }
 
@@ -98,28 +99,24 @@ if (isset ($export)): $path = ''; endif;
 		/* Media queries */
 		@media all and (max-width: 900px) {
 			.container { padding: 1.5em; }
+			#header { padding: 1em 0; }
 			#header .logo { float: none; display: block; margin: 0 0 1em; }
 			#content,
-			#sidebar { width: auto; float: none; }
-			#content { padding: 2em 0; }
-			#sidebar { padding: 0 0 2em; }
+			#sidebar { width: auto; float: none; position: static; }
+			#content { min-width: 0; padding: 2em 0; }
+			#sidebar { padding: 0 0 2em; border: 0; box-shadow: none; background: none; color: #0c0800; }
+			.template-info { width: auto; }
 		}
 		@media all and (max-width: 640px) {
 			.container { padding: 1em; }
-			h1 { font-size: 2em; }
-			h2 { font-size: 1.6em; }
-			h3 { font-size: 1.3em; }
-			h4 { font-size: 1.1em; }
+			h1 { font-size: 3.5em; }
+			h2 { font-size: 2.4em; }
 		}
 		@media all and (max-width: 480px) {
-			body { font-size: 14px; }
-			.template-info th { font-size: xx-small; }
 			h1 a, a.dont-edit { display: block; padding: 1ex 0 0; }
-			.text-field { width: auto; display: block; margin: 0 0 1ex; }
-		}
-		@media all and (max-width: 320px) {
-			body { font-size: 12px; }
-			.text-field { max-width: 200px; }
+			.text-field { width: auto; display: block; margin: 1ex 0; }
+			h1 { font-size: 2.5em; }
+			h2 { font-size: 1.7em; }
 		}
 
 	</style>
@@ -205,24 +202,15 @@ if ($handle) {
 
 				$noExt = explode('.', $statusData[1]);
 
-				if (isset ($export)) {
-				$exportPath = './project/';
+				(isset ($export)) ? $exportPath = './project/' : $exportPath = 'php/';
+				(isset ($export)) ? $extension = 'html' : $extension = 'php';
+
 
 				 echo '<tr>';
-				 echo '<td><a href="'.$exportPath.$noExt[0].'.html">'.$statusData[0].'</a></td>';
-				 echo '<td>'.$noExt[0].'.html</td>';
+				 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData[0].'</a></td>';
+				 echo '<td>'.$noExt[0].'.'.$extension.'</td>';
 				 echo '<td class="status status-'.trim($statusData[2]).'">'.$status.'</td>';
 				 echo '</tr>';
-				}
-				else {
-				 $exportPath = 'php/';
-
-				 echo '<tr>';
-				 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$noExt[1].'">'.$statusData[0].'</a></td>';
-				 echo '<td>'.$noExt[0].'.'.$noExt[1].'</td>';
-				 echo '<td class="status status-'.trim($statusData[2]).'">'.$status.'</td>';
-				 echo '</tr>';
-			 }
 
     }
     if (!feof($handle)) {

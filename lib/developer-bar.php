@@ -5,6 +5,8 @@
 	</div>
 </div>
 <style>
+	.medio-developer-bar,
+	.medio-developer-bar-toggle { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 	.medio-developer-bar {
 		z-index: 10000; position: fixed; right: 0; bottom: 0;
 		padding: 0 0 0 30px; font-size: 14px; line-height: 24px;
