@@ -20,7 +20,7 @@ if (isset ($export)): $path = ''; endif;
 		article, aside, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 		#accessibility-nav, .hide { position: absolute; top: -999em; left: -999em; height: 1px; width: 1px; }
 		.clear { clear: both; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0; }
-		.clearfix:after, #header:after, #footer:after, .template-info li:after { clear: both; content: '&nbsp;'; display: block; font-size: 0; line-height: 0; visibility: hidden; width: 0; height: 0; }
+		.clearfix:after, #footer:after, .template-info li:after { clear: both; content: '&nbsp;'; display: block; font-size: 0; line-height: 0; visibility: hidden; width: 0; height: 0; }
 		#accessibility-nav, .hide { position: absolute; top: -999em; left: -999em; height: 1px; width: 1px; }
 		* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 		html,
@@ -57,13 +57,17 @@ if (isset ($export)): $path = ''; endif;
 
 		.container { position: relative; height: 100%; padding-right: 330px; }
 		#header { position: relative; padding: 2em 2em 1em; }
+		#header:after { content: ''; display: block; width: 100%; height: 4px; margin: 1em 0 0; clear: both;
+		background-color: #8dce93; border: 1px solid #333; }
 
 		#content,
 		#sidebar { padding: 2em; }
-		#content { position: relative; float: left; min-width: 500px; max-width: 800px; }
+		#content { position: relative; float: left; padding-top: 1em; min-width: 500px; max-width: 800px; }
 		#sidebar { position: fixed; right: 0; top: 0; width: 300px; height: 100%; border-left: 10px solid #ef9b2d;
 		box-shadow: -10px 0 0 0 #828282, -20px 0 0 0 #882f2f; background: #f05828; color: #f9f3e3; }
 		#footer { clear: both; padding: 2em; }
+		#footer:before { content: ''; display: block; width: 100%; height: 4px; margin: 0 0 2em; clear: both;
+		background-color: #8dce93; border: 1px solid #333; }
 
 		.template-info { width: 100%; margin: 0 0 3em; }
 		.template-info:last-child { margin: 0 0 1em; }
@@ -148,7 +152,7 @@ if (isset ($export)): $path = ''; endif;
 
 		<form method="post" action="<?php echo 'lib/setup-project.php'; ?>" class="edit-form">
 			<fieldset>
-				<input type="text" name="project-name" required value="<?php echo PROJECT_NAME; ?>" class="text-field">
+				<input type="text" name="project-name" required placeholder="<?php echo PROJECT_NAME; ?>" class="text-field">
 				<input type="submit" value="Přejmenovat" class="btn">
 				<a href="#" class="dont-edit">Nepřejmenovávat</a>
 			</fieldset>
@@ -161,6 +165,11 @@ if (isset ($export)): $path = ''; endif;
 
 
 	<section id="content" role="main">
+
+<?php
+
+
+?>
 
 		<h2>Šablony</h2>
 
@@ -224,7 +233,7 @@ if ($handle) {
 		</table>
 		<!-- / template-info -->
 
-		<h2>Archivy</h2>
+		<h2>Archiv</h2>
 
 		<table class="template-info">
 			<thead>
@@ -235,23 +244,23 @@ if ($handle) {
 				</tr>
 			</thead>
 			<tbody>
-				<?php
-if ($handle = opendir( __DIR__ . '/html')) {
+				<?php 
+if ($handle = opendir( __DIR__ )) {
 	$statusFileContent = '';
   while (false !== ($file = readdir($handle))) {
 	  if ($file != '.' && $file != '..') {
 			$pathinfo = pathinfo($file);
 			if (@$pathinfo['extension'] == 'zip') {
 
-				$exportPath = 'html/';
-				if (isset ($export)) { $exportPath = ''; }
+				$exportPath = '';
+				if (isset ($export)) { $exportPath = '../'; }
 
 
-				$filesize = filesize(__DIR__ . '/html/' . $pathinfo['basename']);
+				$filesize = filesize(__DIR__ . '/' . $pathinfo['basename']);
 				$fileKB = round(($filesize / 1024), 2);
 				echo '<tr>';
 				echo '<td>' . '<a href="' . $exportPath . $pathinfo['basename'] . '">' . $pathinfo['basename'] . '</a></td>';
-				echo '<td>' . date('j.n.Y G:i:s', filemtime(__DIR__ . '/html/'.$pathinfo['basename'])) . '</td>';
+				echo '<td>' . date('j.n.Y G:i:s', filemtime(__DIR__ . '/'.$pathinfo['basename'])) . '</td>';
 				echo '<td>' . $fileKB . 'KB</td>';
 				echo '</tr>';
 
