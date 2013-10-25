@@ -13,10 +13,10 @@ else {
 fclose($projectFileName);
 
 date_default_timezone_set('Europe/Prague');
-/* Jméno projektu */
+/* Name of project */
 define ('PROJECT_NAME', trim($projectName));
-/* Cesta k projektu */
+/* Path to project */
 define ('PROJECT_PATH', '../html/project/');
-/* Doplní do šablon aktuálně použitou verzi jQuery */
+/* Define actual jQuery version */
 define ('JQUERY_VERSION', '1.10.2');
 ?>

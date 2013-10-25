@@ -7,7 +7,7 @@ if ($handle = opendir( __DIR__ . '/../php')) {
 			$pathinfo = pathinfo($file);
 			if (@$pathinfo['extension'] == 'php') {
 
-				/* Generuje HTML šablony */
+				/* Generate HTML templates */
 				$export = true;
 				ob_start();
 				include( __DIR__ . '/../php/'.$pathinfo['basename']);
@@ -20,7 +20,7 @@ if ($handle = opendir( __DIR__ . '/../php')) {
   }
   closedir($handle);
 
-	/* Zapíše aktuální názvy a statusy šablon */
+	/* Write actual template status and names */
 	$statusFileName = __DIR__ . '/../php/config/status.txt';
 	$statusFile = fopen($statusFileName, 'w+');
 	fwrite($statusFile, $statusFileContent);
@@ -28,7 +28,7 @@ if ($handle = opendir( __DIR__ . '/../php')) {
 
 }
 
-/* Vytvoří .zip archiv */
+/* Create .zip archive with project */
 $the_folder = '../html/';
 $zip_file_name = '../html.zip';
  
@@ -66,7 +66,7 @@ class FlxZipArchive extends ZipArchive {
     }
 }
 
-/* Vygeneruje HTML šablonu s přehledem projektu */
+/* Generate HTML template with project overview */
 ob_start();
 include( __DIR__ . '/../index.php');
 $exportedFile = ob_get_contents();

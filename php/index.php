@@ -1,9 +1,9 @@
 <?php
-/* Název stránky, který se zobrazuje v titulku stránky a v přehledu šablon */
+/* Page title, for <title> element and for project overview */
 $templateName = 'Úvodní stránka';
-/* Podle $menu se zvýrazňují aktivní položky v menu */
+/* Variable for highlighting active menu items */
 $menu = 'uvod';
-/* Stav šablony pro stránku přehledu; 0 = čeká, 1 = zpracovává se, 2 = dokončeno */
+/* Project status for project overview; 0 = waiting, 1 = in progress, 2 = finished */
 $templateStatus = 0;
 require_once ( __DIR__ . '/../lib/config.php');
 require ( __DIR__ . '/common/header.php');

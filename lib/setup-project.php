@@ -1,5 +1,5 @@
 <?php
-/* Zde se nastavuje název projektu */
+/* Here is the project name set/updated */
 if (isset($_POST['project-name'])) {
 
 	if ($_POST['project-name'] !== '') {

@@ -1,6 +1,6 @@
 
 <?php
-/* Zajistí se správné cesty při testování a při exportu HTML */
+/* Set correct paths for development and for export */
 $path = PROJECT_PATH;
 if (isset ($export)): $path = ''; endif;
 ?>

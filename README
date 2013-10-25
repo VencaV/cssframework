@@ -1,5 +1,5 @@
 ﻿Medio Interactive CSS framework
-Version: 2.1.0
+Version: 2.2.0
 Author: Václav Vracovský (http://www.medio.cz)
 Date: October 2013
 
@@ -32,6 +32,7 @@ http://gruntjs.com/
                   |___/
 
 1. For development, run
+$ npm install (only for the first time), then run
 $ grunt
 
 2. Create templates in "php" folder, write CSS/JS in the "html/project/_ui" folder.
