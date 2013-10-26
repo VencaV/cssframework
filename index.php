@@ -47,7 +47,8 @@ if (isset ($export)): $path = ''; endif;
 		}
 		h1 { font-size: 4em; line-height: 1; }
 		h1 i,
-		h2 i {font-style: normal; color: #ec6800;}
+		h2 i { font-style: normal; color: #ec6800; }
+		h2 i { padding-right: .5ex; }
 		h1 a,
 		a.dont-edit { padding-left: 1ex; font-family: "Trebuchet MS", "Geneva CE", lucida, sans-serif; font-weight: normal; text-transform: none;
 		font-size: small; letter-spacing: 0; text-shadow: none; }
@@ -58,7 +59,7 @@ if (isset ($export)): $path = ''; endif;
 		em { border-bottom: 1px dotted #999; font-style: italic; }
 
 		.container { position: relative; max-width: 1170px; margin: auto; }
-		#header { position: relative; padding: 2em 2em 1em; }
+		#header { position: relative; padding: 3em 2em 1em; }
 		#header:after { content: ''; display: block; width: 100%; height: 4px; margin: 1em 0 0; clear: both;
 		background-color: #e4c149; box-shadow: 1px 1px 0 #d88a00, -1px -1px 0 #333, -2px -2px 1px #333; }
 
@@ -90,18 +91,19 @@ if (isset ($export)): $path = ''; endif;
 
 		.edit-form { display: none; padding-top: 1ex; }
 		.text-field,
-		.btn { border-radius: 3px; }
+		.btn { border-radius: 3px; border: 2px solid #faf1ae; }
 		.text-field {
-			display: inline-block; width: 220px; height: 34px; padding: 4px 6px; border: 1px solid #0a2e2f;
+			display: inline-block; width: 220px; height: 36px; padding: 4px 6px;
 			font-size: 16px; line-height: 24px;
-			color: #666;
+			background: #ffeec2; color: #666; box-shadow: inset 0 0 10px rgba(43,36,0,.7);
 		}
-		.text-field:focus { color: #333; }
+		.text-field:focus { outline: 0; background: #fff5b3; color: #333; }
 
 		.btn {
-			display: inline-block; padding: 5px 14px 6px; border: 0; font-size: 16px; color: #333; cursor: pointer;
+			display: inline-block; padding: 5px 14px 6px; font-size: 16px; color: #333; cursor: pointer;
 			background: #ec6800; box-shadow: -1px -1px 0 #333;
 		}
+		.btn:hover { background: #ec5e00; }
 		/* Media queries */
 		@media all and (max-width: 900px) {
 			.container { padding: 1.5em; }
@@ -167,7 +169,7 @@ if (isset ($export)): $path = ''; endif;
 
 	<section id="content" role="main">
 
-		<h2>Šablony<i>☜</i></h2>
+		<h2><i>☞</i>Šablony</h2>
 
 		<table class="template-info">
 			<thead>
@@ -229,7 +231,7 @@ if ($handle) {
 		</table>
 		<!-- / template-info -->
 
-		<h2>Archiv<i>☜</i></h2>
+		<h2><i>☞</i>Archiv</h2>
 
 		<table class="template-info">
 			<thead>
