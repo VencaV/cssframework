@@ -54,7 +54,7 @@ if (isset ($export)): $path = ''; endif;
 		font-size: small; letter-spacing: 0; text-shadow: none; }
 		h2 { font-size: 3em; margin-bottom: 0.75em; }
 		h3 { font-size: 2.5em; line-height: 1; margin-bottom: 0.5em; }
-		h4 { font-size: 1.8em; line-height: 1.25; margin-bottom: 1.25em; }
+		h4 { font-size: 1.8em; line-height: 1; margin-bottom: 0.5em; }
 		p { margin-bottom: 1em; }
 		em { border-bottom: 1px dotted #999; font-style: italic; }
 
@@ -80,7 +80,6 @@ if (isset ($export)): $path = ''; endif;
 		.template-info th { font-size: 11px; text-transform: uppercase; }
 		.template-info h4 { margin: 0; }
 
-
 		.status:before {
 		content: ''; position: relative; top: 3px; margin: 0 1ex 0 0;
 		float: left; width: 18px; height: 18px; border-radius: 9px;
@@ -91,19 +90,28 @@ if (isset ($export)): $path = ''; endif;
 
 		.edit-form { display: none; padding-top: 1ex; }
 		.text-field,
-		.btn { border-radius: 3px; border: 2px solid #faf1ae; }
+		.btn,
+		select { border-radius: 3px; border: 2px solid #faf1ae; font-size: 16px; }
+		.text-field,
+		select { display: inline-block; width: 220px; height: 36px; padding: 4px 6px;
+		background: #ffeec2; color: #666; box-shadow: inset 0 0 10px rgba(43,36,0,.7); }
 		.text-field {
-			display: inline-block; width: 220px; height: 36px; padding: 4px 6px;
-			font-size: 16px; line-height: 24px;
-			background: #ffeec2; color: #666; box-shadow: inset 0 0 10px rgba(43,36,0,.7);
+			line-height: 24px;
 		}
-		.text-field:focus { outline: 0; background: #fff5b3; color: #333; }
+
+		.text-field:focus,
+		select:focus { outline: 0; background: #fff5b3; color: #333; }
 
 		.btn {
-			display: inline-block; padding: 5px 14px 6px; font-size: 16px; color: #333; cursor: pointer;
+			display: inline-block; padding: 5px 14px 6px; color: #333; cursor: pointer;
 			background: #ec6800; box-shadow: -1px -1px 0 #333;
 		}
 		.btn:hover { background: #ec5e00; }
+
+		#sidebar .text-field,
+		#sidebar select { margin: 0 0 1ex; }
+		#sidebar select { display: block; }
+
 		/* Media queries */
 		@media all and (max-width: 900px) {
 			.container { padding: 1.5em; }
@@ -188,42 +196,62 @@ if (isset ($export)): $path = ''; endif;
 			<tbody>
 				<?php
 
-/* Load content of status file and write it here */
-$statusFileName = __DIR__ . '/php/config/status.txt';
-$handle = fopen($statusFileName, 'r');
-if ($handle) {
-    while (($statusLine = fgets($handle, 4096)) !== false) {
-        $statusData = explode(';', $statusLine);
+/* Load content of status file and write the data here */
+function getStatusData() {
 
-				switch ($statusData[2]) {
-				case 0:
-				$status = 'Čeká';
-				break;
-				case 1:
-				$status = 'Zpracovává se';
-				break;
-				case 2:
-				$status = 'Dokončeno';
-				break;
-				}
+	$qqq['title'] = '';
+	$qqq['name'] = '';
+	$qqq['status'] = '';
+	$statusFileName = __DIR__ . '/php/config/status.txt';
+	$handle = fopen($statusFileName, 'r');
+	if ($handle) {
+	    while (($statusLine = fgets($handle, 4096)) !== false) {
+	        $statusData = explode(';', $statusLine);
+	        $qqq['title'][] .= $statusData[0];
+	        $qqq['name'][] .= $statusData[1];
+	        $qqq['status'][] .= $statusData[2];
+	    }
+	    if (!feof($handle)) {
+	        echo "Error: unexpected fgets() fail\n";
+	    }
+	    fclose($handle);
+	}
 
-				$noExt = explode('.', $statusData[1]);
+	return $qqq;
 
-				(isset ($export)) ? $exportPath = './project/' : $exportPath = 'php/';
-				(isset ($export)) ? $extension = 'html' : $extension = 'php';
+}
+
+$statusData = getStatusData();
+
+$i = 0;
+$templates = '';
+foreach ($statusData['name'] as $name) {
+	switch ($statusData['status'][$i]) {
+		case 0:
+		$status = 'Čeká';
+		break;
+		case 1:
+		$status = 'Zpracovává se';
+		break;
+		case 2:
+		$status = 'Dokončeno';
+		break;
+		}
+
+	$noExt = explode('.', $name);
+
+	(isset ($export)) ? $exportPath = './project/' : $exportPath = 'php/';
+	(isset ($export)) ? $extension = 'html' : $extension = 'php';
 
 
-				 echo '<tr>';
-				 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData[0].'</a></td>';
-				 echo '<td>'.$noExt[0].'.'.$extension.'</td>';
-				 echo '<td class="status status-'.trim($statusData[2]).'">'.$status.'</td>';
-				 echo '</tr>';
+	 echo '<tr>';
+	 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData['title'][$i].'</a></td>';
+	 echo '<td>'.$noExt[0].'.'.$extension.'</td>';
+	 echo '<td class="status status-'.trim($statusData['status'][$i]).'">'.$status.'</td>';
+	 echo '</tr>';
 
-    }
-    if (!feof($handle)) {
-        echo "Error: unexpected fgets() fail\n";
-    }
-    fclose($handle);
+	$i++;
+	$templates .= $name . ';';
 }
 				?>
 
@@ -278,7 +306,7 @@ if ($handle = opendir( __DIR__ )) {
 	<hr>
 
 	<aside id="sidebar" role="complementary">
-
+		<?php if (isset ($export)):?>
 		<p>
 			Zde si můžete prohlédnout své HTML šablony a&nbsp;stáhnout si archiv
 			s&nbsp;jejich aktuální verzí.
@@ -289,7 +317,40 @@ if ($handle = opendir( __DIR__ )) {
 			Všechny soubory umístěné vně složky <em>project</em> (m.j. tento soubor)
 			by neměly být nahrány na váš server.
 		</p>
+		<?php else: ?>
 
+			<h4>Nová šablona</h4>
+
+			<p style="font-size: 11px;">
+				Todo: dodělat možnost nastavit title při vytvoření šablony.
+			</p>
+
+			<form method="post" action="<?php echo 'lib/create-template.php'; ?>" class="add-form" data-templates="<?php echo $templates; ?>">
+				<fieldset>
+					<?php // <input type="text" name="new-template-title" id="new-template-title" required placeholder="New template title" class="text-field"> ?>
+					<input type="text" name="new-template-name" id="new-template-name" required placeholder="New template name" class="text-field">
+					.php
+				</fieldset>
+				based on
+				<select name="new-template-source">
+				<?php
+$i = 0;
+foreach ($statusData['name'] as $e) {
+
+echo '<option value="' . $statusData['name'][$i] . '">' . $statusData['name'][$i] . '</option>';
+
+$i++;
+}
+				?>
+				</select>
+				<input type="submit" value="Create template" class="btn">
+			</form>
+			<br>
+			<form method="post" action="<?php echo 'lib/index.php'; ?>">
+				<input type="submit" value="Update project overview" class="btn">
+			</form>
+
+		<?php endif; ?>
 	</aside>
 	<!-- / sidebar -->
 	<hr>
@@ -334,6 +395,22 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 			$('.edit').slideToggle();
 		});
 
+		/* Warning when we want overwrite existing template */
+		function checkExistingTemplates() {
+			var existingTemplates = $('.add-form').attr('data-templates');
+			var newTemplate = $('#new-template-name').val();
+
+			$contain = false;
+			if(existingTemplates.indexOf(newTemplate) != -1){
+				$contain = true;
+			}
+			return $contain;
+		}
+		$('.add-form').on('submit', function() {
+			if (checkExistingTemplates()) {
+				return confirm('Template already exists. Do you want to overwrite it?');
+			};
+		});
 	});
 </script>
 

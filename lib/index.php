@@ -72,4 +72,7 @@ include( __DIR__ . '/../index.php');
 $exportedFile = ob_get_contents();
 ob_end_clean();
 file_put_contents( __DIR__ . '/../html/index.html', $exportedFile);
+if (isset($_SERVER['HTTP_REFERER'])):
+    header('Location:'.$_SERVER['HTTP_REFERER'].'');
+endif;
 ?>

@@ -13,6 +13,7 @@ if (isset ($export)): $path = ''; endif;
 	<link rel="stylesheet" media="all" href="<?php echo $path;?>_ui/css/main.css"<?php if (!isset ($export)):?> id="css"<?php endif; ?>>
 	<!--[if lte IE 8]>
   		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $path;?>_ui/css/ie8.css">
+		<script src="<?php echo $path;?>_ui/js/respond.min.js"></script>
 	<![endif]-->
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $path;?>favicon.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $path;?>apple-touch-icon-144x144-precomposed.png">
