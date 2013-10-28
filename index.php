@@ -322,7 +322,8 @@ if ($handle = opendir( __DIR__ )) {
 			<h4>Nová šablona</h4>
 
 			<p style="font-size: 11px;">
-				Todo: dodělat možnost nastavit title při vytvoření šablony.
+				Todo: dodělat možnost nastavit title při vytvoření šablony.<br>
+				Todo: validaci vstupu - zatím není kontrola znaků pro název šablony.
 			</p>
 
 			<form method="post" action="<?php echo 'lib/create-template.php'; ?>" class="add-form" data-templates="<?php echo $templates; ?>">
@@ -395,18 +396,36 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 			$('.edit').slideToggle();
 		});
 
+		/* Only a-z, 0-9 and -_ allowed in template name */
+		function checkCharacters() {
+
+			//var str = $('#new-template-name').val(); 
+			var str = $('#new-template-name').val();
+			var regex = /[a-z]|_-|\d/;
+			var passed = true;
+			for (var i = 0, l = str.length; i < l; i++) {
+				if(!regex.test(str[i])) { passed = false; }
+
+			}
+			return passed;
+		}
+
 		/* Warning when we want overwrite existing template */
 		function checkExistingTemplates() {
 			var existingTemplates = $('.add-form').attr('data-templates');
 			var newTemplate = $('#new-template-name').val();
 
-			$contain = false;
+			var contain = false;
 			if(existingTemplates.indexOf(newTemplate) != -1){
-				$contain = true;
+				contain = true;
 			}
-			return $contain;
+			return contain;
 		}
 		$('.add-form').on('submit', function() {
+			if (!checkCharacters()) {
+				alert('Only a-z, 0-9 and "-" or "_" allowed in template name');
+				return false;
+			}
 			if (checkExistingTemplates()) {
 				return confirm('Template already exists. Do you want to overwrite it?');
 			};
