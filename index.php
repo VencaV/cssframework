@@ -323,7 +323,7 @@ if ($handle = opendir( __DIR__ )) {
 
 			<p style="font-size: 11px;">
 				Todo: dodělat možnost nastavit title při vytvoření šablony.<br>
-				Todo: validaci vstupu - zatím není kontrola znaků pro název šablony.
+				Todo: mazání a úpravy title šablon ze stránky přehledu.
 			</p>
 
 			<form method="post" action="<?php echo 'lib/create-template.php'; ?>" class="add-form" data-templates="<?php echo $templates; ?>">
