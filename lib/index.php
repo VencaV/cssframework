@@ -30,7 +30,7 @@ if ($handle = opendir( __DIR__ . '/../php')) {
 
 /* Create .zip archive with project */
 $the_folder = '../html/';
-$zip_file_name = '../html.zip';
+$zip_file_name = '../html/html.zip';
  
 $za = new FlxZipArchive;
  
@@ -57,7 +57,7 @@ class FlxZipArchive extends ZipArchive {
         $dir = opendir ($location);
         while ($file = readdir($dir))
         {
-            if ($file == '.' || $file == '..') continue;
+            if ($file == '.' || $file == '..' || $file == 'html.zip') continue;
  
             // Recursive, If dir: FlxZipArchive::addDir(), else ::File();
             $do = (filetype( $location . $file) == 'dir') ? 'addDir' : 'addFile';

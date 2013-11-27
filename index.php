@@ -271,22 +271,22 @@ foreach ($statusData['name'] as $name) {
 			</thead>
 			<tbody>
 				<?php 
-if ($handle = opendir( __DIR__ )) {
+if ($handle = opendir( __DIR__  . '/html')) {
 	$statusFileContent = '';
   while (false !== ($file = readdir($handle))) {
 	  if ($file != '.' && $file != '..') {
 			$pathinfo = pathinfo($file);
 			if (@$pathinfo['extension'] == 'zip') {
 
-				$exportPath = '';
-				if (isset ($export)) { $exportPath = '../'; }
+				$exportPath = 'html/';
+				if (isset ($export)) { $exportPath = './'; }
 
 
-				$filesize = filesize(__DIR__ . '/' . $pathinfo['basename']);
+				$filesize = filesize(__DIR__ . '/html/' . $pathinfo['basename']);
 				$fileKB = round(($filesize / 1024), 2);
 				echo '<tr>';
 				echo '<td>' . '<a href="' . $exportPath . $pathinfo['basename'] . '">' . $pathinfo['basename'] . '</a></td>';
-				echo '<td>' . date('j.n.Y G:i:s', filemtime(__DIR__ . '/'.$pathinfo['basename'])) . '</td>';
+				echo '<td>' . date('j.n.Y G:i:s', filemtime(__DIR__ . '/html/'.$pathinfo['basename'])) . '</td>';
 				echo '<td>' . $fileKB . 'KB</td>';
 				echo '</tr>';
 
