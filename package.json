@@ -1,12 +1,12 @@
 {
   "name": "medio-interactive-css-framework",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "author": "Václav Vracovský, http://www.medio.cz/",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-less": "~0.7.0",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-php": "~0.2.0",
-    "grunt-contrib-uglify": "~0.2.4"
+    "grunt-contrib-requirejs": "~0.4.1"
   }
 }

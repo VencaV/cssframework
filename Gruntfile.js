@@ -23,16 +23,27 @@ grunt.initConfig({
 		}
 		},
 		watch: {
-			files: [
-				'html/project/_ui/css/*.less',
-				'html/project/_ui/css/modules/*.less',
-				'html/project/_ui/bootstrap/less/*.less',
-				'php/*.php',
-				'php/common/*.php'
-			],
-			tasks: ['less:development'],
-				options: {
-				livereload: 1337
+			css: {
+				files: [
+					'html/project/_ui/css/*.less',
+					'html/project/_ui/css/modules/*.less',
+					'html/project/_ui/bootstrap/less/*.less',
+					'php/*.php',
+					'php/common/*.php'
+				],
+				tasks: ['less:development'],
+					options: {
+					livereload: 1337
+				}
+			},
+			js: {
+				files: [
+					'html/project/_ui/js/*.js'
+				],
+				tasks: ['requirejs:compile'],
+					options: {
+					livereload: 1337
+				}
 			}
 		},
 		php: {
@@ -51,26 +62,28 @@ grunt.initConfig({
 				}
 			}
 		},
-		uglify: {
-			minJs: {			
+		requirejs: {
+			compile: {
 				options: {
-					report: 'gzip'
-				},
-				files: {
-					'html/project/_ui/js/main.min.js': ['html/project/_ui/js/main.js']
+					baseUrl: 'html/project/_ui/js/',
+					paths: {
+						jquery: 'jquery-1.10.2.min'
+					},
+					name: 'main',
+					out: 'html/project/_ui/js/main.min.js',
+					removeCombined: false,
+					preserveLicenseComments: false
+				}
 			}
 		}
-	}
-});
+	});
 
-grunt.loadNpmTasks('grunt-contrib-less');
-grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-php');
-grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-php');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-grunt.registerTask('default', ['php:exportPhp','php:dev','less:development','watch']);
-grunt.registerTask('export', ['less:production','php:exportPhp']);
-grunt.registerTask('minjs', ['uglify:minJs']);
-
+	grunt.registerTask('default', ['requirejs:compile','php:exportPhp','php:dev','less:development','watch']);
+	grunt.registerTask('export', ['requirejs:compile','less:production','php:exportPhp']);
 
 };

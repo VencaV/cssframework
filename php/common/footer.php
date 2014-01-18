@@ -6,9 +6,15 @@
 	</div>
 	<!-- / container -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION;?>/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?php echo $path;?>_ui/js/jquery-<?php echo JQUERY_VERSION;?>.min.js"><\/script>')</script>
-<script src="<?php echo $path;?>_ui/js/main.js"></script>
+	<script>
+	require = {
+		paths: {
+			jquery: '//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION;?>/jquery.min'
+		},
+		baseUrl : '<?php echo $path;?>_ui/js/'
+	};
+	</script>
+	<script data-main="main.min" src="<?php echo $path;?>_ui/js/require.js"></script>
 
 <?php
 if (!isset ($export)):

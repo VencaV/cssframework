@@ -44,6 +44,7 @@
 		outline: 0;
 	}
 </style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION;?>/jquery.min.js"></script>
 <script>
 	/* Toggle all media queries for development */
 	if (getCookie('medioDeveloperBarNoMediaQueries') === 'true') {
