@@ -1,6 +1,6 @@
 {
   "name": "medio-interactive-css-framework",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "author": "Václav Vracovský, http://www.medio.cz/",
   "devDependencies": {
     "grunt": "~0.4.1",

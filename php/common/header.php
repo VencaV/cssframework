@@ -1,4 +1,3 @@
-
 <?php
 /* Set correct paths for development and for export */
 $path = PROJECT_PATH;
