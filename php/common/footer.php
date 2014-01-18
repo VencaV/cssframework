@@ -6,15 +6,7 @@
 	</div>
 	<!-- / container -->
 
-	<script>
-	require = {
-		paths: {
-			jquery: '//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION;?>/jquery.min'
-		},
-		baseUrl : '<?php echo $path;?>_ui/js/'
-	};
-	</script>
-	<script data-main="main.min" src="<?php echo $path;?>_ui/js/require.js"></script>
+	<script src="<?php echo $path;?>_ui/js/main.min.js"></script>
 
 <?php
 if (!isset ($export)):
