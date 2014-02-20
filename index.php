@@ -380,7 +380,7 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 <!-- / container -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION;?>/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?php echo $path?>_ui/js/jquery-<?php echo JQUERY_VERSION;?>.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="<?php echo $path?>_ui/js/modules/jquery-<?php echo JQUERY_VERSION;?>-min.js"><\/script>')</script>
 <script>
 	$(document).ready(function() {
 		/* Show/hide form for renae of project */

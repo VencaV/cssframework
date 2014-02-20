@@ -12,13 +12,11 @@ require ( __DIR__ . '/common/header.php');
 			<p>content</p>
 		</section>
 		<!-- / content -->
-		<hr>
 
 		<aside id="sidebar" role="complementary">
 			<p>sidebar</p>
 		</aside>
 		<!-- / sidebar -->
-		<hr>
 <?php
 require ( __DIR__ . '/common/footer.php');
 ?>

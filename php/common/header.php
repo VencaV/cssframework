@@ -4,7 +4,7 @@ $path = PROJECT_PATH;
 if (isset ($export)): $path = ''; endif;
 ?>
 <!doctype html>
-<html lang="cs" dir="ltr">
+<html lang="cs" dir="ltr" class="no-js">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,7 +12,7 @@ if (isset ($export)): $path = ''; endif;
 	<link rel="stylesheet" media="all" href="<?php echo $path;?>_ui/css/main.css"<?php if (!isset ($export)):?> id="css"<?php endif; ?>>
 	<!--[if lte IE 8]>
   		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $path;?>_ui/css/ie8.css">
-		<script src="<?php echo $path;?>_ui/js/respond.min.js"></script>
+		<script src="<?php echo $path;?>_ui/js/modules/respond.min.js"></script>
 	<![endif]-->
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $path;?>favicon.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $path;?>apple-touch-icon-144x144-precomposed.png">
@@ -24,7 +24,7 @@ if (isset ($export)): $path = ''; endif;
 	<meta property="og:url" content="">
 	<meta property="og:description" content="">
 	<meta property="og:image" content="<?php echo $path;?>apple-touch-icon-144x144-precomposed.png">
-	<script src="<?php echo $path;?>_ui/js/modernizr.js"></script>
+	<script src="<?php echo $path;?>_ui/js/modules/modernizr.js"></script>
 </head>
 <body>
 
@@ -39,7 +39,6 @@ if (isset ($export)): $path = ''; endif;
 			</ol>
 		</nav>
 		<!-- / accessibility-nav -->
-		<hr>
 
 		<header id="header">
 			<h1 class="site-name">
@@ -47,7 +46,8 @@ if (isset ($export)): $path = ''; endif;
 			</h1>
 		</header>
 		<!-- / header -->
-		<hr>
+
+		<a class="btn btn-default toggle-menu">Menu</a>
 
 		<nav id="navigation" role="navigation" aria-label="Hlavní menu">
 			<ul>
@@ -59,4 +59,3 @@ if (isset ($export)): $path = ''; endif;
 			</ul>
 		</nav>
 		<!-- / navigation -->
-		<hr>

@@ -18,5 +18,5 @@ define ('PROJECT_NAME', trim($projectName));
 /* Path to project */
 define ('PROJECT_PATH', '../html/project/');
 /* Define actual jQuery version */
-define ('JQUERY_VERSION', '1.10.2');
+define ('JQUERY_VERSION', '1.11.0');
 ?>

@@ -40,7 +40,7 @@ grunt.initConfig({
 				files: [
 					'html/project/_ui/js/modules/*.js'
 				],
-				tasks: ['concat'],
+				tasks: ['compile-js'],
 					options: {
 					livereload: 1337
 				}
@@ -68,10 +68,20 @@ grunt.initConfig({
 			},
 			dist: {
 				src: [
-					'html/project/_ui/js/jquery-<%= pkg.jqueryversion %>.min.js',
+					'html/project/_ui/js/modules/jquery-<%= pkg.jqueryversion %>.min.js',
 					'html/project/_ui/js/modules/main.js'
 				],
-				dest: 'html/project/_ui/js/main.min.js',
+				dest: 'html/project/_ui/js/main.js',
+			}
+		},
+		uglify: {
+			options: {
+				//
+			},
+			dist: {
+				files: {
+					'html/project/_ui/js/main-min.js': ['html/project/_ui/js/main.js']
+				}
 			}
 		}
 	});
@@ -80,8 +90,11 @@ grunt.initConfig({
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-php');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	grunt.registerTask('default', ['concat','php:exportPhp','php:dev','less:development','watch']);
-	grunt.registerTask('export', ['concat','less:production','php:exportPhp']);
+	grunt.registerTask('compile-js', ['concat','uglify']);
+	grunt.registerTask('default', ['compile-js','php:exportPhp','php:dev','less:development','watch']);
+	grunt.registerTask('export', ['compile-js','less:production','php:exportPhp']);
+	grunt.registerTask('compile', ['compile-js','less:production']);
 
 };
