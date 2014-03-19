@@ -68,7 +68,7 @@ grunt.initConfig({
 			},
 			dist: {
 				src: [
-					'html/project/_ui/js/modules/jquery-<%= pkg.jqueryversion %>.min.js',
+					//'html/project/_ui/js/modules/jquery-<%= pkg.jqueryversion %>.min.js',
 					'html/project/_ui/js/modules/main.js'
 				],
 				dest: 'html/project/_ui/js/main.js',

@@ -1,10 +1,3 @@
-<?php
-/* Load config file with necessary constants */
-require_once ( __DIR__ . '/lib/config.php');
-/* Set correct paths for development and for export */
-$path = PROJECT_PATH;
-if (isset ($export)): $path = ''; endif;
-?>
 <!doctype html>
 <html lang="cs" dir="ltr">
 <head>
@@ -157,19 +150,8 @@ if (isset ($export)): $path = ''; endif;
 
 	<header id="header">
 
-<?php if ( PROJECT_NAME === 'Project Name' && !isset($export) ) ?>
-		<h1><i>✰</i><?php echo PROJECT_NAME; ?><i>✰</i><?php if (!isset($export)) { ?><a class="edit" href="#">Rename</a><?php } ?></h1>
-		<?php if (!isset($export)) { ?>
-
-		<form method="post" action="<?php echo 'lib/setup-project.php'; ?>" class="edit-form">
-			<fieldset>
-				<input type="text" name="project-name" required placeholder="<?php echo PROJECT_NAME; ?>" class="text-field">
-				<input type="submit" value="Rename" class="btn">
-				<a href="#" class="dont-edit">Don't rename</a>
-			</fieldset>
-		</form>
-		<?php } ?>
-
+		<h1><i>✰</i>Název projektu<i>✰</i></h1>
+		
 	</header>
 	<!-- / header -->
 	<hr>
@@ -194,67 +176,7 @@ if (isset ($export)): $path = ''; endif;
 				</tr>
 			</thead>
 			<tbody>
-				<?php
-
-/* Load content of status file and write the data here */
-function getStatusData() {
-
-	$qqq['title'] = '';
-	$qqq['name'] = '';
-	$qqq['status'] = '';
-	$statusFileName = __DIR__ . '/php/config/status.txt';
-	$handle = fopen($statusFileName, 'r');
-	if ($handle) {
-	    while (($statusLine = fgets($handle, 4096)) !== false) {
-	        $statusData = explode(';', $statusLine);
-	        $qqq['title'][] .= $statusData[0];
-	        $qqq['name'][] .= $statusData[1];
-	        $qqq['status'][] .= $statusData[2];
-	    }
-	    if (!feof($handle)) {
-	        echo "Error: unexpected fgets() fail\n";
-	    }
-	    fclose($handle);
-	}
-
-	return $qqq;
-
-}
-
-$statusData = getStatusData();
-
-$i = 0;
-$templates = '';
-foreach ($statusData['name'] as $name) {
-	switch ($statusData['status'][$i]) {
-		case 0:
-		$status = 'Čeká';
-		break;
-		case 1:
-		$status = 'Zpracovává se';
-		break;
-		case 2:
-		$status = 'Dokončeno';
-		break;
-		}
-
-	$noExt = explode('.', $name);
-
-	(isset ($export)) ? $exportPath = './project/' : $exportPath = 'php/';
-	(isset ($export)) ? $extension = 'html' : $extension = 'php';
-
-
-	 echo '<tr>';
-	 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData['title'][$i].'</a></td>';
-	 echo '<td>'.$noExt[0].'.'.$extension.'</td>';
-	 echo '<td class="status status-'.trim($statusData['status'][$i]).'">'.$status.'</td>';
-	 echo '</tr>';
-
-	$i++;
-	$templates .= $name . ';';
-}
-				?>
-
+				<tr><td><a href="./project/index.html">Úvodní stránka</a></td><td>index.html</td><td class="status status-0">Čeká</td></tr>
 			</tbody>
 		</table>
 		<!-- / template-info -->
@@ -270,33 +192,7 @@ foreach ($statusData['name'] as $name) {
 				</tr>
 			</thead>
 			<tbody>
-				<?php 
-if ($handle = opendir( __DIR__  . '/html')) {
-	$statusFileContent = '';
-  while (false !== ($file = readdir($handle))) {
-	  if ($file != '.' && $file != '..') {
-			$pathinfo = pathinfo($file);
-			if (@$pathinfo['extension'] == 'zip') {
-
-				$exportPath = 'html/';
-				if (isset ($export)) { $exportPath = './'; }
-
-
-				$filesize = filesize(__DIR__ . '/html/' . $pathinfo['basename']);
-				$fileKB = round(($filesize / 1024), 2);
-				echo '<tr>';
-				echo '<td>' . '<a href="' . $exportPath . $pathinfo['basename'] . '">' . $pathinfo['basename'] . '</a></td>';
-				echo '<td>' . date('j.n.Y G:i:s', filemtime(__DIR__ . '/html/'.$pathinfo['basename'])) . '</td>';
-				echo '<td>' . $fileKB . 'KB</td>';
-				echo '</tr>';
-
-			}
-	  }
-  }
-  closedir($handle);
-}
-?>
-
+				<tr><td><a href="./html.zip">html.zip</a></td><td>19.3.2014 13:10:30</td><td>479.39KB</td></tr>
 			</tbody>
 		</table>
 		<!-- / template-info -->
@@ -306,8 +202,7 @@ if ($handle = opendir( __DIR__  . '/html')) {
 	<hr>
 
 	<aside id="sidebar" role="complementary">
-		<?php if (isset ($export)):?>
-		<p>
+				<p>
 			Zde si můžete prohlédnout své HTML šablony a&nbsp;stáhnout si archiv
 			s&nbsp;jejich aktuální verzí.
 		</p>
@@ -317,59 +212,13 @@ if ($handle = opendir( __DIR__  . '/html')) {
 			Všechny soubory umístěné vně složky <em>project</em> (m.j. tento soubor)
 			by neměly být nahrány na váš server.
 		</p>
-		<?php else: ?>
-
-			<h4>Nová šablona</h4>
-
-			<p style="font-size: 11px;">
-				Todo: mazání a úpravy title šablon ze stránky přehledu.
-			</p>
-
-			<form method="post" action="<?php echo 'lib/create-template.php'; ?>" class="add-form" data-templates="<?php echo $templates; ?>">
-				<fieldset>
-					<?php // <input type="text" name="new-template-title" id="new-template-title" required placeholder="New template title" class="text-field"> ?>
-					<input type="text" name="new-template-name" id="new-template-name" required placeholder="New template name" class="text-field">
-					.php
-				</fieldset>
-				based on
-				<select name="new-template-source">
-				<?php
-$i = 0;
-foreach ($statusData['name'] as $e) {
-
-echo '<option value="' . $statusData['name'][$i] . '">' . $statusData['name'][$i] . '</option>';
-
-$i++;
-}
-				?>
-				</select>
-				<input type="submit" value="Create template" class="btn">
-			</form>
-			<br>
-			<form method="post" action="<?php echo 'lib/index.php'; ?>">
-				<input type="submit" value="Update project overview" class="btn">
-			</form>
-
-		<?php endif; ?>
-	</aside>
+			</aside>
 	<!-- / sidebar -->
 	<hr>
 
 	<footer id="footer">
 		<p>
-			&copy; <?php
-$date = date('Y', time());
-if ($date < 2012)
-{
-echo date('Y', time());
-}
-else
-{
-echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
-}
-
-?>
-
+			&copy; 2011&nbsp;&ndash;&nbsp;2014
 			<a href="http://www.medio.cz" title="Medio Interactive - Až o 42 % webovější než obyčejné weby."><span>Medio Interactive, s.r.o.</span></a>
 		</p>
 	</footer>
@@ -378,8 +227,8 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 </div>
 <!-- / container -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION;?>/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?php echo $path?>_ui/js/modules/jquery-<?php echo JQUERY_VERSION;?>-min.js"><\/script>')</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="_ui/js/modules/jquery-1.11.0-min.js"><\/script>')</script>
 <script>
 	$(document).ready(function() {
 		/* Show/hide form for rename of project */
