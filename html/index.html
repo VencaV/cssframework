@@ -82,7 +82,8 @@
 		.status-2:before { background-color: #0daa18; }
 
 		.edit-form { display: none; padding-top: 1ex; }
-		.delete-form { display: inline; }
+		.inline-form { display: inline; }
+		.edit-title-form > div { display: none; }
 		label { display: block; }
 		.text-field,
 		.btn,
@@ -98,7 +99,8 @@
 		select:focus { outline: 0; background: #fff5b3; color: #333; }
 
 		.btn {
-			display: inline-block; padding: 5px 14px 6px; color: #333; cursor: pointer;
+			display: inline-block; padding: 5px 14px 6px; color: #333;
+			text-decoration: none; cursor: pointer;
 			background: #ec6800; box-shadow: -1px -1px 0 #333;
 		}
 		.btn.btn-small { padding: 2px 5px; border-style: none; font-size: 12px; line-height: 11px; font-weight: bold; }
@@ -179,7 +181,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr><td><a href="./project/index.html">Úvodní stránka</a></td><td>index.html</td><td class="status status-0">Čeká</td></tr>
+				<tr class="index"><td><a href="./project/index.html">Úvodní stránka</a></td><td>index.html</td><td class="status status-0">Čeká</td></tr>
 			</tbody>
 		</table>
 		<!-- / template-info -->
@@ -195,7 +197,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr><td><a href="./html.zip">html.zip</a></td><td>16.4.2014 12:57:22</td><td>479.46KB</td></tr>
+				<tr><td><a href="./html.zip">html.zip</a></td><td>16.4.2014 20:02:29</td><td>479.6KB</td></tr>
 			</tbody>
 		</table>
 		<!-- / template-info -->
@@ -234,6 +236,15 @@
 <script>window.jQuery || document.write('<script src="_ui/js/modules/jquery-1.11.0-min.js"><\/script>')</script>
 <script>
 	$(document).ready(function() {
+
+		/* Move table row with index to top of table */
+		function moveRow() {
+			var row = $('tr.index');
+			var table = row.parents('table');
+			row.prependTo(table);
+		}
+		moveRow();
+
 		/* Show/hide form for rename of project */
 		$('.edit').click(function(e) {
 			e.preventDefault();
@@ -280,8 +291,16 @@
 				return confirm('Template already exists. Do you want to overwrite it?');
 			};
 		});
+
+		/* Warning before deleting template */
 		$('.delete-form').on('submit', function() {
 			return confirm('Really delete this template?');
+		});
+
+		/* Warning before deleting template */
+		$('.edit-title-form a').on('click', function(e) {
+			e.preventDefault();
+			$(this).siblings('div').slideToggle(250);
 		});
 	});
 </script>

@@ -26,7 +26,6 @@ else
 	
 
 	$str = preg_replace('/\$templateName = \'(.*?)\';/', "\$templateName = '" . ucfirst($title) . "';", $str);
-	echo $str;
 
 	file_put_contents($newfile, $str);
 

@@ -89,7 +89,8 @@ if (isset ($export)): $path = ''; endif;
 		.status-2:before { background-color: #0daa18; }
 
 		.edit-form { display: none; padding-top: 1ex; }
-		.delete-form { display: inline; }
+		.inline-form { display: inline; }
+		.edit-title-form > div { display: none; }
 		label { display: block; }
 		.text-field,
 		.btn,
@@ -105,7 +106,8 @@ if (isset ($export)): $path = ''; endif;
 		select:focus { outline: 0; background: #fff5b3; color: #333; }
 
 		.btn {
-			display: inline-block; padding: 5px 14px 6px; color: #333; cursor: pointer;
+			display: inline-block; padding: 5px 14px 6px; color: #333;
+			text-decoration: none; cursor: pointer;
 			background: #ec6800; box-shadow: -1px -1px 0 #333;
 		}
 		.btn.btn-small { padding: 2px 5px; border-style: none; font-size: 12px; line-height: 11px; font-weight: bold; }
@@ -202,17 +204,17 @@ if (isset ($export)): $path = ''; endif;
 /* Load content of status file and write the data here */
 function getStatusData() {
 
-	$qqq['title'] = '';
-	$qqq['name'] = '';
-	$qqq['status'] = '';
+	$template['title'] = '';
+	$template['name'] = '';
+	$template['status'] = '';
 	$statusFileName = __DIR__ . '/php/config/status.txt';
 	$handle = fopen($statusFileName, 'r');
 	if ($handle) {
 	    while (($statusLine = fgets($handle, 4096)) !== false) {
 	        $statusData = explode(';', $statusLine);
-	        $qqq['title'][] .= $statusData[0];
-	        $qqq['name'][] .= $statusData[1];
-	        $qqq['status'][] .= $statusData[2];
+	        $template['title'][] .= $statusData[0];
+	        $template['name'][] .= $statusData[1];
+	        $template['status'][] .= $statusData[2];
 	    }
 	    if (!feof($handle)) {
 	        echo "Error: unexpected fgets() fail\n";
@@ -220,7 +222,7 @@ function getStatusData() {
 	    fclose($handle);
 	}
 
-	return $qqq;
+	return $template;
 
 }
 
@@ -247,11 +249,17 @@ foreach ($statusData['name'] as $name) {
 	(isset ($export)) ? $extension = 'html' : $extension = 'php';
 
 
-	 echo '<tr>';
-	 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData['title'][$i].'</a></td>';
+	 echo '<tr';
+	 if ($noExt[0] === 'index') { echo ' class="index"'; }
+	 echo '>';
+	 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData['title'][$i].'</a>';
+	 if (!isset($export)) {
+	 	echo ' <form method="post" action="lib/edit-template.php" class="inline-form edit-title-form"><input type="hidden" name="template" value="'.$noExt[0].'.'.$extension.'"><a class="btn btn-small" title="Edit template title">edit</a><div><input type="text" name="new-template-title" placeholder="New title" class="text-field" required><input type="submit" value="ok" class="btn"></div></form>';
+	 }
+	 echo '</td>';
 	 echo '<td>'.$noExt[0].'.'.$extension;
 	 if (!isset($export) && ($noExt[0] !== 'index')) {
-	 	echo ' <form method="post" action="lib/delete-template.php" class="delete-form"><input type="hidden" name="template" value="'.$noExt[0].'"><input type="submit" value="x" class="btn btn-small" title="Delete template"></form>';
+	 	echo ' <form method="post" action="lib/delete-template.php" class="inline-form delete-form"><input type="hidden" name="template" value="'.$noExt[0].'"><input type="submit" value="x" class="btn btn-small" title="Delete template"></form>';
 	 }
 	 echo '</td>';
 	 echo '<td class="status status-'.trim($statusData['status'][$i]).'">'.$status.'</td>';
@@ -387,6 +395,15 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 <script>window.jQuery || document.write('<script src="<?php echo $path?>_ui/js/modules/jquery-<?php echo JQUERY_VERSION;?>-min.js"><\/script>')</script>
 <script>
 	$(document).ready(function() {
+
+		/* Move table row with index to top of table */
+		function moveRow() {
+			var row = $('tr.index');
+			var table = row.parents('table');
+			row.prependTo(table);
+		}
+		moveRow();
+
 		/* Show/hide form for rename of project */
 		$('.edit').click(function(e) {
 			e.preventDefault();
@@ -433,8 +450,16 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 				return confirm('Template already exists. Do you want to overwrite it?');
 			};
 		});
+
+		/* Warning before deleting template */
 		$('.delete-form').on('submit', function() {
 			return confirm('Really delete this template?');
+		});
+
+		/* Warning before deleting template */
+		$('.edit-title-form a').on('click', function(e) {
+			e.preventDefault();
+			$(this).siblings('div').slideToggle(250);
 		});
 	});
 </script>
