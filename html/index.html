@@ -74,7 +74,7 @@
 		.template-info h4 { margin: 0; }
 
 		.status:before {
-		content: ''; position: relative; top: 3px; margin: 0 1ex 0 0;
+		content: ''; position: relative; top: 4px; margin: 0 1ex 0 0;
 		float: left; width: 18px; height: 18px; border-radius: 9px;
 		}
 		.status-0:before { background-color: #990e11; }
@@ -82,6 +82,8 @@
 		.status-2:before { background-color: #0daa18; }
 
 		.edit-form { display: none; padding-top: 1ex; }
+		.delete-form { display: inline; }
+		label { display: block; }
 		.text-field,
 		.btn,
 		select { border-radius: 3px; border: 2px solid #faf1ae; font-size: 16px; }
@@ -99,6 +101,7 @@
 			display: inline-block; padding: 5px 14px 6px; color: #333; cursor: pointer;
 			background: #ec6800; box-shadow: -1px -1px 0 #333;
 		}
+		.btn.btn-small { padding: 2px 5px; border-style: none; font-size: 12px; line-height: 11px; font-weight: bold; }
 		.btn:hover { background: #ec5e00; }
 
 		#sidebar .text-field,
@@ -192,7 +195,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr><td><a href="./html.zip">html.zip</a></td><td>19.3.2014 13:10:30</td><td>479.39KB</td></tr>
+				<tr><td><a href="./html.zip">html.zip</a></td><td>16.4.2014 12:57:22</td><td>479.46KB</td></tr>
 			</tbody>
 		</table>
 		<!-- / template-info -->
@@ -248,7 +251,7 @@
 		function checkCharacters() {
 
 			var str = $('#new-template-name').val();
-			var regex = /[a-z]|_-|\d/, " ";
+			var regex = /[a-z]|_-|\d|\s/;
 			var passed = true;
 			for (var i = 0, l = str.length; i < l; i++) {
 				if(!regex.test(str[i])) { passed = false; }
@@ -276,6 +279,9 @@
 			if (checkExistingTemplates()) {
 				return confirm('Template already exists. Do you want to overwrite it?');
 			};
+		});
+		$('.delete-form').on('submit', function() {
+			return confirm('Really delete this template?');
 		});
 	});
 </script>

@@ -81,7 +81,7 @@ if (isset ($export)): $path = ''; endif;
 		.template-info h4 { margin: 0; }
 
 		.status:before {
-		content: ''; position: relative; top: 3px; margin: 0 1ex 0 0;
+		content: ''; position: relative; top: 4px; margin: 0 1ex 0 0;
 		float: left; width: 18px; height: 18px; border-radius: 9px;
 		}
 		.status-0:before { background-color: #990e11; }
@@ -89,6 +89,8 @@ if (isset ($export)): $path = ''; endif;
 		.status-2:before { background-color: #0daa18; }
 
 		.edit-form { display: none; padding-top: 1ex; }
+		.delete-form { display: inline; }
+		label { display: block; }
 		.text-field,
 		.btn,
 		select { border-radius: 3px; border: 2px solid #faf1ae; font-size: 16px; }
@@ -106,6 +108,7 @@ if (isset ($export)): $path = ''; endif;
 			display: inline-block; padding: 5px 14px 6px; color: #333; cursor: pointer;
 			background: #ec6800; box-shadow: -1px -1px 0 #333;
 		}
+		.btn.btn-small { padding: 2px 5px; border-style: none; font-size: 12px; line-height: 11px; font-weight: bold; }
 		.btn:hover { background: #ec5e00; }
 
 		#sidebar .text-field,
@@ -246,7 +249,11 @@ foreach ($statusData['name'] as $name) {
 
 	 echo '<tr>';
 	 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData['title'][$i].'</a></td>';
-	 echo '<td>'.$noExt[0].'.'.$extension.'</td>';
+	 echo '<td>'.$noExt[0].'.'.$extension;
+	 if (!isset($export) && ($noExt[0] !== 'index')) {
+	 	echo ' <form method="post" action="lib/delete-template.php" class="delete-form"><input type="hidden" name="template" value="'.$noExt[0].'"><input type="submit" value="x" class="btn btn-small" title="Delete template"></form>';
+	 }
+	 echo '</td>';
 	 echo '<td class="status status-'.trim($statusData['status'][$i]).'">'.$status.'</td>';
 	 echo '</tr>';
 
@@ -321,18 +328,16 @@ if ($handle = opendir( __DIR__  . '/html')) {
 
 			<h4>Nová šablona</h4>
 
-			<p style="font-size: 11px;">
-				Todo: mazání a úpravy title šablon ze stránky přehledu.
-			</p>
-
 			<form method="post" action="<?php echo 'lib/create-template.php'; ?>" class="add-form" data-templates="<?php echo $templates; ?>">
 				<fieldset>
-					<?php // <input type="text" name="new-template-title" id="new-template-title" required placeholder="New template title" class="text-field"> ?>
+					<label for="new-template-title">New template title:</label>
+					<input type="text" name="new-template-title" id="new-template-title" required placeholder="New template title" class="text-field">
+					<label for="new-template-name">New template name:</label>
 					<input type="text" name="new-template-name" id="new-template-name" required placeholder="New template name" class="text-field">
 					.php
 				</fieldset>
-				based on
-				<select name="new-template-source">
+				<label for="new-template-source">Based on:</label>
+				<select name="new-template-source" id="new-template-source">
 				<?php
 $i = 0;
 foreach ($statusData['name'] as $e) {
@@ -399,7 +404,7 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 		function checkCharacters() {
 
 			var str = $('#new-template-name').val();
-			var regex = /[a-z]|_-|\d/, " ";
+			var regex = /[a-z]|_-|\d|\s/;
 			var passed = true;
 			for (var i = 0, l = str.length; i < l; i++) {
 				if(!regex.test(str[i])) { passed = false; }
@@ -427,6 +432,9 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 			if (checkExistingTemplates()) {
 				return confirm('Template already exists. Do you want to overwrite it?');
 			};
+		});
+		$('.delete-form').on('submit', function() {
+			return confirm('Really delete this template?');
 		});
 	});
 </script>
