@@ -31,13 +31,16 @@ http://gruntjs.com/
                    __/ |
                   |___/
 
-1. For development, run
+1. Save pre-commit hook:
+$ ln -s ../../pre-commit.sh .git/hooks/pre-commit
+
+2. For development, run
 $ npm install (only for the first time), then run
 $ grunt
 
-2. Create templates in "php" folder, write CSS/JS in the "html/project/_ui" folder.
+3. Create templates in "php" folder, write CSS/JS in the "html/project/_ui" folder.
 
-3. When you're done, run:
+4. When you're done, run:
 $ grunt export
 
 4. All HTML templates and CSS/JS are now ready inside the "html/project" folder.

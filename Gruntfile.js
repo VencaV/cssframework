@@ -92,8 +92,9 @@ grunt.initConfig({
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	grunt.registerTask('compile-js', ['concat','uglify']);
 	grunt.registerTask('default', ['compile-js','php:exportPhp','php:dev','less:development','watch']);
+	grunt.registerTask('compile-js', ['concat','uglify']);
+	grunt.registerTask('compile-css', ['less:production']);
 	grunt.registerTask('export', ['compile-js','less:production','php:exportPhp']);
 	grunt.registerTask('compile', ['compile-js','less:production']);
 

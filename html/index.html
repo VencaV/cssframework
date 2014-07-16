@@ -197,7 +197,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr><td><a href="./html.zip">html.zip</a></td><td>16.4.2014 20:02:29</td><td>479.6KB</td></tr>
+				<tr><td><a href="./html.zip">html.zip</a></td><td>16.7.2014 10:26:33</td><td>480.15KB</td></tr>
 			</tbody>
 		</table>
 		<!-- / template-info -->
@@ -262,7 +262,7 @@
 		function checkCharacters() {
 
 			var str = $('#new-template-name').val();
-			var regex = /[a-z]|_-|\d|\s/;
+			var regex = /[a-z]|[_-]|\d|\s/;
 			var passed = true;
 			for (var i = 0, l = str.length; i < l; i++) {
 				if(!regex.test(str[i])) { passed = false; }

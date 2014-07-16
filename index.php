@@ -421,7 +421,7 @@ echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 		function checkCharacters() {
 
 			var str = $('#new-template-name').val();
-			var regex = /[a-z]|_-|\d|\s/;
+			var regex = /[a-z]|[_-]|\d|\s/;
 			var passed = true;
 			for (var i = 0, l = str.length; i < l; i++) {
 				if(!regex.test(str[i])) { passed = false; }
