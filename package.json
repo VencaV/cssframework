@@ -2,7 +2,7 @@
   "name": "medio-interactive-css-framework",
   "version": "2.4.0",
   "jqueryversion": "1.11.0",
-  "bootstrapversion": "3.1.1",
+  "bootstrapversion": "3.2.0",
   "author": "Václav Vracovský, http://www.medio.cz/",
   "devDependencies": {
     "grunt": "~0.4.1",

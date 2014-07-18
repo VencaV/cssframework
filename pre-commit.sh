@@ -1,5 +1,5 @@
 #!/bin/sh
 echo "executing pre-commit"
 grunt export
-git add . -A
+git add .
 exit 0
