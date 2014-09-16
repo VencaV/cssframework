@@ -1,7 +1,7 @@
 ﻿Medio Interactive CSS framework
-Version: 2.4.1
+Version: 2.4.2
 Author: Václav Vracovský (http://www.medio.cz)
-Date: July 2014
+Date: September 2014
 
 
  _____                  _                               _
@@ -31,8 +31,9 @@ http://gruntjs.com/
                    __/ |
                   |___/
 
-1. Save pre-commit hook:
+1. Save pre & post-commit hook:
 $ ln -s ../../pre-commit.sh .git/hooks/pre-commit
+$ ln -s ../../post-commit.sh .git/hooks/post-commit
 
 2. For development, run
 $ npm install (only for the first time), then run

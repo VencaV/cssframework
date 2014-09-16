@@ -1,1 +1,1 @@
-$(".toggle-menu").on("click",function(a){a.preventDefault(),$("#navigation").toggle()});
+$(function(){$(".toggle-menu").on("click",function(a){a.preventDefault(),$("#navigation").toggle()})});

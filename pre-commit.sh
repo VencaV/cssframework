@@ -1,5 +1,6 @@
 #!/bin/sh
-echo "executing pre-commit"
+echo "Exporting HTML files"
 grunt export
-git add .
-exit 0
+echo 
+touch .commit 
+exit
