@@ -1,17 +1,11 @@
-﻿Medio Interactive CSS framework
-Version: 2.4.2
-Author: Václav Vracovský (http://www.medio.cz)
+﻿HTML & CSS framework
+Version: 2.4.3
+Author: Václav Vracovský (http://vracovsky.cz)
 Date: September 2014
 
 
- _____                  _                               _
-|  __ \                (_)                             | |
-| |__) |___  __ _ _   _ _ _ __ ___ _ __ ___   ___ _ __ | |_ ___
-|  _  // _ \/ _` | | | | | '__/ _ \ '_ ` _ \ / _ \ '_ \| __/ __|
-| | \ \  __/ (_| | |_| | | | |  __/ | | | | |  __/ | | | |_\__ \
-|_|  \_\___|\__, |\__,_|_|_|  \___|_| |_| |_|\___|_| |_|\__|___/
-               | |
-               |_|
+Requirements
+______________________________________________________
 
 PHP 5.4.0+
 http://www.php.net/
@@ -22,14 +16,9 @@ http://nodejs.org/
 Grunt
 http://gruntjs.com/
 
- _    _
-| |  | |
-| |  | |___  __ _  __ _  ___
-| |  | / __|/ _` |/ _` |/ _ \
-| |__| \__ \ (_| | (_| |  __/
- \____/|___/\__,_|\__, |\___|
-                   __/ |
-                  |___/
+
+Usage
+______________________________________________________
 
 1. Save pre & post-commit hook:
 $ ln -s ../../pre-commit.sh .git/hooks/pre-commit

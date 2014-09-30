@@ -31,6 +31,10 @@ if ($handle = opendir( __DIR__ . '/../php')) {
 /* Create .zip archive with project */
 $the_folder = '../html/';
 $zip_file_name = '../html/html.zip';
+
+if(file_exists($zip_file_name)) {
+	unlink($zip_file_name);
+}
  
 $za = new FlxZipArchive;
  

@@ -5,20 +5,24 @@ grunt.initConfig({
 	less: {
 		development: {
 			options: {
-				yuicompress: false
+				yuicompress: false,
+				sourceMap: true,
+                sourceMapFilename: 'html/project/_ui/css/main.css.map',
+                sourceMapURL: 'main.css.map',
+                sourceMapRootpath: '/', // adds this path onto the sourcemap filename and less file paths
 			},
 			files: {
-				'html/project/_ui/css/main.css': 'html/project/_ui/css/main.less',
-				'html/project/_ui/css/ie8.css': 'html/project/_ui/css/ie8.less'
+				'html/project/_ui/css/ie8.css': 'html/project/_ui/css/ie8.less',
+				'html/project/_ui/css/main.css': 'html/project/_ui/css/main.less'
 			}
 		},
 		production: {
-				options: {
+			options: {
 				yuicompress: true
 			},
 			files: {
-				'html/project/_ui/css/main.css': 'html/project/_ui/css/main.less',
-				'html/project/_ui/css/ie8.css': 'html/project/_ui/css/ie8.less'
+				'html/project/_ui/css/ie8.css': 'html/project/_ui/css/ie8.less',
+				'html/project/_ui/css/main.css': 'html/project/_ui/css/main.less'
 			}
 		}
 		},
