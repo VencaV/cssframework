@@ -9,7 +9,13 @@ require_once ( __DIR__ . '/../lib/config.php');
 require ( __DIR__ . '/common/header.php');
 ?>
 		<section id="content" role="main">
-			<p>content</p>
+			<p>
+				content
+				</p>
+			<p>
+				<a class="btn btn-primary">Primary button</a><br>
+				<a class="btn btn-default">Default button</a>
+			</p>
 		</section>
 		<!-- / content -->
 

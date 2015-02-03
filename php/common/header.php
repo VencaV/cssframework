@@ -47,7 +47,7 @@ if (isset ($export)): $path = ''; endif;
 		</header>
 		<!-- / header -->
 
-		<a class="btn btn-default toggle-menu">Menu</a>
+		<a href="#" class="btn btn-default toggle-menu">Menu</a>
 
 		<nav id="navigation" role="navigation" aria-label="Hlavní menu">
 			<ul>

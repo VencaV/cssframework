@@ -1,7 +1,7 @@
 {
   "name": "just-html-and-css-framework",
-  "version": "2.4.4",
-  "jqueryversion": "1.11.1",
+  "version": "2.4.5",
+  "jqueryversion": "1.11.2",
   "bootstrapversion": "3.3.1",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
