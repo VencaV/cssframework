@@ -482,6 +482,31 @@ if (isset ($export)): $path = ''; endif;
 			e.preventDefault();
 			$(this).siblings('div').slideToggle(250);
 		});
+
+		/* Transform teplate title into template name */
+		function slug(str) {
+			str = str.replace(/^\s+|\s+$/g, ''); // trim
+			str = str.toLowerCase();
+
+			// remove accents, swap ñ for n, etc
+			var from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñçěščřžýáíéóúůňďť·/_,:;'
+			var to   = 'aaaaaeeeeeiiiiooooouuuuncescrzyaieouundt------'
+			for (var i=0, l=from.length ; i<l ; i++) {
+				str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+			}
+
+			str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+			.replace(/\s+/g, '-') // collapse whitespace and replace by -
+			.replace(/-+/g, '-'); // collapse dashes
+
+			return str;
+		};
+
+		$('#new-template-title').on('keyup', function() {
+			var val = $(this).val()
+			var name = $('#new-template-name')
+			name.attr('value',slug(val))
+		})
 	});
 </script>
 
