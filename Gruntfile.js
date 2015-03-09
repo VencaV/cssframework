@@ -9,7 +9,7 @@ grunt.initConfig({
 				sourceMap: true,
 				sourceMapFilename: 'html/project/_ui/css/main.css.map',
 				sourceMapURL: 'main.css.map',
-				sourceMapRootpath: '/',
+				sourceMapRootpath: '/'
 			},
 			files: {
 				'html/project/_ui/css/ie8.css': 'html/project/_ui/css/ie8.less',

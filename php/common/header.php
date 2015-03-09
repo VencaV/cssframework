@@ -8,7 +8,7 @@ if (isset ($export)): $path = ''; endif;
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title><?php echo PROJECT_NAME ?> | <?php echo $templateName ?></title>
+	<title><?php echo $templateName ?> | <?php echo PROJECT_NAME ?></title>
 	<link rel="stylesheet" media="all" href="<?php echo $path;?>_ui/css/main.css"<?php if (!isset ($export)):?> id="css"<?php endif; ?>>
 	<!--[if lte IE 8]>
   		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $path;?>_ui/css/ie8.css">

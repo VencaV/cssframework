@@ -11,7 +11,7 @@ require ( __DIR__ . '/common/header.php');
 		<section id="content" role="main">
 			<p>
 				content
-				</p>
+			</p>
 			<p>
 				<a class="btn btn-primary">Primary button</a><br>
 				<a class="btn btn-default">Default button</a>

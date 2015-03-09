@@ -62,7 +62,11 @@ if (isset ($export)): $path = ''; endif;
 		#footer .smaller a { color: #999; }
 		#footer .smaller a:hover { color: #b80718; }
 
-		.template-info { width: 100%; margin: 0 0 3em; }
+		.template-info { width: 100%; margin: 0 0 2em; }
+		.template-info + p {
+			margin-top: -1em;
+			margin-bottom: 2em;
+		}
 		.template-info:last-child { margin: 0; }
 		.template-info tr { transition: background-color linear .15s; }
 		.template-info tr:nth-child(even) { background: rgba(0,0,0,.017); }
@@ -72,6 +76,9 @@ if (isset ($export)): $path = ''; endif;
 		.template-info th { font-size: 11px; text-transform: uppercase; color: #666; }
 		.template-info h4 { margin: 0; }
 
+		.status {
+			white-space: nowrap;
+		}
 		.status:before {
 			content: ''; position: relative; top: 5px; margin: 0 1ex 0 0;
 			float: left; width: 18px; height: 18px; border-radius: 9px;
@@ -86,7 +93,8 @@ if (isset ($export)): $path = ''; endif;
 		label { display: block; }
 		.text-field,
 		.btn,
-		select { vertical-align: middle; border-radius: 3px; border: 1px solid #ddd; font-size: 16px; }
+		a.btn,
+		select { vertical-align: middle; border-radius: 3px; border: 1px solid #ddd; font-size: 16px; color: #333; }
 		.text-field,
 		select { display: inline-block; width: 220px; height: 36px; padding: 4px 6px;
 		background: #fdfdfd; color: #999; transition: background linear .15s; }
@@ -113,6 +121,48 @@ if (isset ($export)): $path = ''; endif;
 		#sidebar select { margin: 0 0 1ex; }
 		#sidebar select { display: block; }
 
+		.template-browser {
+			display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%;
+			border: 10px solid rgba(0,0,0,0);
+			background-color: rgba(0,0,0,.15);
+		}
+		.template-browser-header,
+		a.template-browser-close {
+			position: fixed;
+			top: 0;
+			padding: 5px 10px;
+			font-size: 13px; background: rgba(30,30,30,.6);
+			color: #fff; text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+			box-shadow: inset 0 0 12px 0 rgba(0,0,0,.4);
+			color: #fff;
+		}
+		.template-browser-close {
+			z-index: 3; right: 0;
+			text-decoration: none;
+			border-radius: 0 0 0 3px;
+		}
+		.template-browser-header {
+			z-index: 2; position: fixed; left: 0; top: 0; margin-right: 30px;
+			border-radius: 0 0 3px 0;
+		}
+		.template-browser-header a {
+			display: inline-block;
+			padding: 0 5px;
+			color: #fff;
+		}
+		.template-browser-header a.active {
+			text-decoration: none;
+			cursor: not-allowed;
+		}
+		.template-browser-content {
+			z-index: 1; position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+		}
+		.template-browser iframe {
+			width: 100%; height: 100%; border: 0; margin: 0; padding: 0;
+			border: 1px solid #eee;
+			box-shadow: 1px 1px 2px rgba(0,0,0,.4);
+		}
+
 		/* Media queries */
 		@media all and (max-width: 900px) {
 			.container { padding: 0 1.5em; }
@@ -122,15 +172,43 @@ if (isset ($export)): $path = ''; endif;
 			#sidebar { width: auto; float: none; padding: 0; }
 			#content { min-width: 0; padding: 2em 0; }
 			#sidebar { padding: 0 0 2em; border: 0; box-shadow: none; background: none; color: #0c0800; }
-			.template-info { width: auto; }
 		}
-		@media all and (max-width: 640px) {
+		@media all and (max-width: 767px) {
 			.container { padding: 0 1em; }
 			h1 { font-size: 2.5em; }
 			h2,
 			h3 { font-size: 1.7em; }
+			table.template-info thead {
+				display: none;
+			}
+			table.template-info th,
+			table.template-info td,
+			table.template-info tr {
+				display: block;
+			}
+			table.template-info th,
+			table.template-info td {
+				display: block;
+				padding-top: .25ex;
+				padding-bottom: .25ex;
+				border: 0;
+			}
+			table.template-info tr {
+				padding-bottom: 10px;
+				margin-bottom: 10px;
+				border-bottom: 1px dashed #e5e5e5;
+			}
+			table.template-info tr:last-child {
+				margin-bottom: 0;
+				padding-bottom: 0;
+				border-bottom: 0;
+			}
+			.template-info tr:nth-child(even),
+			.template-info tbody tr:hover {
+				background: none;
+			}
 		}
-		@media all and (max-width: 480px) {
+		@media all and (max-width: 479px) {
 			h1 a, a.dont-edit { display: block; padding: 1ex 0 0; }
 			.text-field { width: auto; display: block; margin: 1ex 0; }
 			h1 { font-size: 1.8em; }
@@ -167,7 +245,7 @@ if (isset ($export)): $path = ''; endif;
 
 		<form method="post" action="<?php echo 'lib/setup-project.php'; ?>" class="edit-form">
 			<fieldset>
-				<input type="text" name="project-name" required placeholder="<?php echo PROJECT_NAME; ?>" class="text-field">
+				<input type="text" id="project-name" name="project-name" required placeholder="<?php echo PROJECT_NAME; ?>" class="text-field">
 				<input type="submit" value="Rename" class="btn">
 				<a href="#" class="dont-edit">Don't rename</a>
 			</fieldset>
@@ -257,7 +335,7 @@ if (isset ($export)): $path = ''; endif;
 		 echo '<tr';
 		 if ($noExt[0] === 'index') { echo ' class="index"'; }
 		 echo '>';
-		 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'">'.$statusData['title'][$i].'</a>';
+		 echo '<td><a href="'.$exportPath.$noExt[0].'.'.$extension.'" class="template-name">'.$statusData['title'][$i].'</a>';
 		 if (!isset($export)) {
 		 	echo ' <form method="post" action="lib/edit-template.php" class="inline-form edit-title-form"><input type="hidden" name="template" value="'.$noExt[0].'.'.$extension.'"><a class="btn btn-small" title="Edit template title">edit</a><div><input type="text" name="new-template-title" placeholder="New title" class="text-field" required><input type="submit" value="ok" class="btn"></div></form>';
 		 }
@@ -278,6 +356,15 @@ if (isset ($export)): $path = ''; endif;
 				</tbody>
 			</table>
 			<!-- / template-info -->
+
+			<p>
+				<a href="#" class="btn template-browser-show">Procházet všechny šablony</a>
+			</p>
+			<div class="template-browser">
+				<div class="template-browser-header"></div>
+				<div class="template-browser-content"><iframe></iframe></div>
+				<a href="#" class="template-browser-close">X</a>
+			</div>
 
 			<h2>Archiv</h2>
 
@@ -428,8 +515,9 @@ if (isset ($export)): $path = ''; endif;
 		/* Show/hide form for rename of project */
 		$('.edit').click(function(e) {
 			e.preventDefault();
-			$('.edit-form').slideToggle();
+			$('.edit-form').slideToggle(200);
 			$(this).toggle();
+			$('#project-name').focus()
 		});
 
 		$('.dont-edit').click(function(e) {
@@ -502,11 +590,42 @@ if (isset ($export)): $path = ''; endif;
 			return str;
 		};
 
-		$('#new-template-title').on('keyup', function() {
+		$('#new-template-title').on('keyup blur', function() {
 			var val = $(this).val()
 			var name = $('#new-template-name')
 			name.attr('value',slug(val))
 		})
+
+		// Template browser
+		$('.template-name').each(function() {
+			var title = $(this).text()
+			var src = $(this).attr('href')
+			$('.template-browser-header').append('<a href="' + src + '">' + title + '</a>')
+		})
+		$('.template-browser-header a').on('click', function(e) {
+			e.preventDefault()
+			if(!$(this).hasClass('active')) {
+				appendIframe($(this))
+			}
+		})
+		$('.template-browser-show').on('click', function(e) {
+			e.preventDefault()
+			$('.template-browser').fadeIn(200)
+			$('body').css('overflow', 'hidden')
+		})
+		$('.template-browser-close').on('click', function(e) {
+			e.preventDefault()
+			$('.template-browser').fadeOut(200)
+			$('body').css('overflow', 'auto')
+		})
+		function appendIframe(el) {
+			$('.template-browser-header a').removeClass('active')
+			el === undefined ? el =  $('.template-browser-header a:first-child') : el = el
+			var src = el.attr('href')
+			$('.template-browser-content iframe').attr('src', src)
+			el.addClass('active')
+		}
+		appendIframe()
 	});
 </script>
 
