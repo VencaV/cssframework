@@ -31,39 +31,15 @@ grunt.initConfig({
 				files: [
 					'<%= pkg.csspath %>*.less',
 					'<%= pkg.csspath %>modules/*.less',
-					'<%= pkg.csspath %>bootstrap/less/*.less',
-					'php/*.php',
-					'php/common/*.php'
+					'<%= pkg.csspath %>bootstrap/less/*.less'
 				],
-				tasks: ['less:development'],
-					options: {
-					livereload: 1337
-				}
+				tasks: ['less:development']
 			},
 			js: {
 				files: [
 					'<%= pkg.jspath %>modules/*.js'
 				],
-				tasks: ['compile-js'],
-					options: {
-					livereload: 1337
-				}
-			}
-		},
-		php: {
-			dev: {
-				options: {
-					open: true,
-					hostname: '127.0.0.1',
-					port: 35729
-				}
-			},
-			exportPhp: {
-				options: {
-					hostname: '127.0.0.1',
-					port: 35728,
-					base: 'lib'
-				}
+				tasks: ['compile-js']
 			}
 		},
 		concat: {
@@ -92,15 +68,13 @@ grunt.initConfig({
 
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-php');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	grunt.registerTask('default', ['compile-js','php:exportPhp','php:dev','compile-css-dev','watch']);
+	grunt.registerTask('default', ['compile-js','compile-css-dev','watch']);
 	grunt.registerTask('compile-js', ['concat','uglify']);
 	grunt.registerTask('compile-css', ['less:production']);
 	grunt.registerTask('compile-css-dev', ['less:development']);
-	grunt.registerTask('export', ['compile-js','less:production','php:exportPhp']);
 	grunt.registerTask('compile', ['compile-js','less:production']);
 
 };

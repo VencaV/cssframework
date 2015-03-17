@@ -3,8 +3,8 @@
   "version": "2.5.1",
   "jqueryversion": "1.11.2",
   "bootstrapversion": "3.3.1",
-  "csspath": "html/project/_ui/css/",
-  "jspath": "html/project/_ui/js/",
+  "csspath": "../css/",
+  "jspath": "../js/",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
     "type": "git",
@@ -15,7 +15,6 @@
     "grunt-contrib-less": "~0.11.4",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-concat": "~0.5.0",
-    "grunt-contrib-uglify": "~0.6.0",
-    "grunt-php": "~1.0.1"
+    "grunt-contrib-uglify": "~0.6.0"
   }
 }

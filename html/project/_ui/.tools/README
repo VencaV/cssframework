@@ -1,0 +1,28 @@
+﻿HTML & CSS framework
+Version: 2.5.1
+Author: Václav Vracovský (http://vracovsky.cz)
+Date: March 2015
+
+
+Requirements
+______________________________________________________
+
+nodeJs
+http://nodejs.org/
+
+Grunt
+http://gruntjs.com/
+
+
+Usage
+______________________________________________________
+
+1. For development, run
+$ npm install (only for the first time), then run
+$ grunt
+
+2. Available tasks
+$ grunt --- compiles all CSS and JS and starts watch mode
+$ grunt compile --- compiles all CSS and JS
+$ grunt compile-js --- compiles JS
+$ grunt compile-css --- compiles CSS
