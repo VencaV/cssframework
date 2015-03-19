@@ -46,21 +46,31 @@ grunt.initConfig({
 			options: {
 				separator: ';',
 			},
-			dist: {
+			main: {
 				src: [
-					//'<%= pkg.jspath %>modules/jquery-<%= pkg.jqueryversion %>.min.js',
-					'<%= pkg.jspath %>modules/main.js'
+					'<%= pkg.jsfiles %>'
 				],
 				dest: '<%= pkg.jspath %>main.js',
+			},
+			magic: {
+				src: [
+					'<%= pkg.magicfiles %>'
+				],
+				dest: '<%= pkg.jspath %>magic.js',
 			}
 		},
 		uglify: {
 			options: {
 				//
 			},
-			dist: {
+			main: {
 				files: {
 					'<%= pkg.jspath %>main-min.js': ['<%= pkg.jspath %>main.js']
+				}
+			},
+			magic: {
+				files: {
+					'<%= pkg.jspath %>magic-min.js': ['<%= pkg.jspath %>magic.js']
 				}
 			}
 		}

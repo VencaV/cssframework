@@ -1,14 +1,14 @@
 {
   "name": "just-html-and-css-framework",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "jqueryversion": "1.11.2",
-  "bootstrapversion": "3.3.1",
-  "csspath": "../css/",
-  "jspath": "../js/",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
     "type": "git",
     "url": "https://github.com/VencaV/cssframework.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VencaV/cssframework/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -16,5 +16,15 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-concat": "~0.5.0",
     "grunt-contrib-uglify": "~0.6.0"
-  }
+  },
+  "bootstrapversion": "3.3.1",
+  "csspath": "../css/",
+  "jspath": "../js/",
+  "magicfiles": [
+    "<%= pkg.jspath %>modules/modernizr.js",
+    "<%= pkg.jspath %>modules/picturefill.js"
+  ],
+  "jsfiles": [
+    "<%= pkg.jspath %>modules/main.js"
+  ]
 }

@@ -122,7 +122,7 @@ if (isset ($export)): $path = ''; endif;
 		#sidebar select { display: block; }
 
 		.template-browser {
-			display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%;
+			display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%;
 			border: 10px solid rgba(0,0,0,0);
 			background-color: rgba(0,0,0,.15);
 		}
@@ -472,15 +472,7 @@ if (isset ($export)): $path = ''; endif;
 
 		<p>
 			&copy; <?php
-	$date = date('Y', time());
-	if ($date < 2012)
-	{
-	echo date('Y', time());
-	}
-	else
-	{
-	echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
-	}
+		echo '2011&nbsp;&ndash;&nbsp;' . date('Y', time());
 
 	?>
 
@@ -491,6 +483,8 @@ if (isset ($export)): $path = ''; endif;
 			<a href="https://github.com/VencaV/cssframework" target="_blank">CSS framework</a>
 			|
 			<a href="https://github.com/VencaV/wpready" target="_blank">WordPress ready CSS framework</a>
+			<br>
+			Uvolněno pod licencí <a href="https://github.com/VencaV/cssframework/blob/master/LICENSE">MIT</a>
 		</p>
 
 	</div>

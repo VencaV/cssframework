@@ -19,7 +19,7 @@
 	<meta property="og:url" content="">
 	<meta property="og:description" content="">
 	<meta property="og:image" content="apple-touch-icon-144x144-precomposed.png">
-	<script src="_ui/js/modules/modernizr.js"></script>
+	<script src="_ui/js/magic-min.js" async></script>
 </head>
 <body>
 
@@ -37,7 +37,12 @@
 
 		<header id="header">
 			<h1 class="site-name">
-				<a href="#" rel="home" title="Přejít na úvodní stránku" accesskey="2" role="banner"><img src="_ui/gfx/logo.png" alt="Site name"></a>
+				<a href="#" rel="home" title="Přejít na úvodní stránku" accesskey="2" role="banner">
+					<picture>
+						<source srcset="_ui/gfx/logo.svg" type="image/svg+xml">
+						<img srcset="_ui/gfx/logo.png" alt="Název projektu">
+					</picture>
+				</a>
 			</h1>
 		</header>
 		<!-- / header -->
@@ -56,7 +61,13 @@
 		<!-- / navigation -->
 		<section id="content" role="main">
 			<p>
-				content
+				<picture>
+					<!--[if IE 9]><video style="display: none;"><![endif]-->
+					<source srcset="http://dummy.mirtes.cz/600x600/333333" media="(min-width: 992px)">
+					<source srcset="http://dummy.mirtes.cz/400x400/aaaaaa" media="(min-width: 768px)">
+					<!--[if IE 9]></video><![endif]-->
+					<img srcset="http://dummy.mirtes.cz/200x200/eeeeee" alt="Lorem ipsum">
+				</picture>
 			</p>
 			<p>
 				<a class="btn btn-primary">Primary button</a><br>
@@ -77,8 +88,8 @@
 	</div>
 	<!-- / container -->
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="_ui/js/modules/jquery-1.11.0.min.js"><\/script>')</script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="_ui/js/modules/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="_ui/js/main-min.js"></script>
 
 

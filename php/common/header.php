@@ -24,7 +24,7 @@ if (isset ($export)): $path = ''; endif;
 	<meta property="og:url" content="">
 	<meta property="og:description" content="">
 	<meta property="og:image" content="<?php echo $path;?>apple-touch-icon-144x144-precomposed.png">
-	<script src="<?php echo $path;?>_ui/js/modules/modernizr.js"></script>
+	<script src="<?php echo $path;?>_ui/js/magic-min.js" async></script>
 </head>
 <body>
 
@@ -42,7 +42,12 @@ if (isset ($export)): $path = ''; endif;
 
 		<header id="header">
 			<h1 class="site-name">
-				<a href="#" rel="home" title="Přejít na úvodní stránku" accesskey="2" role="banner"><img src="<?php echo $path;?>_ui/gfx/logo.png" alt="Site name"></a>
+				<a href="#" rel="home" title="Přejít na úvodní stránku" accesskey="2" role="banner">
+					<picture>
+						<source srcset="<?php echo $path;?>_ui/gfx/logo.svg" type="image/svg+xml">
+						<img srcset="<?php echo $path;?>_ui/gfx/logo.png" alt="<?php echo PROJECT_NAME ?>">
+					</picture>
+				</a>
 			</h1>
 		</header>
 		<!-- / header -->
