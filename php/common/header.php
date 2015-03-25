@@ -1,7 +1,11 @@
 <?php
 /* Set correct paths for development and for export */
 $path = PROJECT_PATH;
-if (isset ($export)): $path = ''; endif;
+$min = '';
+if (isset ($export)) {
+	$path = '';
+	$min = '-min';
+}
 ?>
 <!doctype html>
 <html lang="cs" dir="ltr" class="no-js">
@@ -24,7 +28,7 @@ if (isset ($export)): $path = ''; endif;
 	<meta property="og:url" content="">
 	<meta property="og:description" content="">
 	<meta property="og:image" content="<?php echo $path;?>apple-touch-icon-144x144-precomposed.png">
-	<script src="<?php echo $path;?>_ui/js/magic-min.js" async></script>
+	<script src="<?php echo $path;?>_ui/js/magic<?php echo $min;?>.js" async></script>
 </head>
 <body>
 
