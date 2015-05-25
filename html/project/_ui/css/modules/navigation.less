@@ -3,11 +3,14 @@
 	display: none;
 }
 
-@media (min-width: @screen-sm-min) {
-	.toggle-menu {
-		display: none;
-	}
-	#navigation {
+#navigation {
+	@media (min-width: @screen-sm-min) {
 		display: block !important;
+	}
+}
+
+.toggle-menu {
+	@media (min-width: @screen-sm-min) {
+		display: none;
 	}
 }

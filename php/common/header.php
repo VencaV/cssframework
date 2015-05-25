@@ -47,10 +47,7 @@ if (isset ($export)) {
 		<header id="header">
 			<h1 class="site-name">
 				<a href="#" rel="home" title="Přejít na úvodní stránku" accesskey="2" role="banner">
-					<picture>
-						<source srcset="<?php echo $path;?>_ui/gfx/logo.svg" type="image/svg+xml">
-						<img srcset="<?php echo $path;?>_ui/gfx/logo.png" alt="<?php echo PROJECT_NAME ?>">
-					</picture>
+					<img src="<?php echo $path;?>_ui/gfx/logo.png" alt="<?php echo PROJECT_NAME ?>">
 				</a>
 			</h1>
 		</header>

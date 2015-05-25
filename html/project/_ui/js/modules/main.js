@@ -42,5 +42,7 @@ $(function() {
 
 	var narrow = false
 	parseInt($(window).width()) + getScrollBarWidth() > 767 ? narrow = false : narrow = true
+
+	$('img').unveil()
 	
 });

@@ -1,7 +1,7 @@
 {
   "name": "just-html-and-css-framework",
-  "version": "2.5.3",
-  "jqueryversion": "1.11.2",
+  "version": "2.5.4",
+  "jqueryversion": "1.11.3",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
     "type": "git",
@@ -21,10 +21,10 @@
   "csspath": "../css/",
   "jspath": "../js/",
   "magicfiles": [
-    "<%= pkg.jspath %>modules/modernizr.js",
-    "<%= pkg.jspath %>modules/picturefill.js"
+    "<%= pkg.jspath %>modules/modernizr.js"
   ],
   "jsfiles": [
+    "<%= pkg.jspath %>modules/jquery.unveil.js",
     "<%= pkg.jspath %>modules/main.js"
   ]
 }

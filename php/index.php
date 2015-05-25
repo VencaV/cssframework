@@ -10,13 +10,7 @@ require ( __DIR__ . '/common/header.php');
 ?>
 		<section id="content" role="main">
 			<p>
-				<picture>
-					<!--[if IE 9]><video style="display: none;"><![endif]-->
-					<source srcset="http://dummy.mirtes.cz/600x600/333333" media="(min-width: 992px)">
-					<source srcset="http://dummy.mirtes.cz/400x400/aaaaaa" media="(min-width: 768px)">
-					<!--[if IE 9]></video><![endif]-->
-					<img srcset="http://dummy.mirtes.cz/200x200/eeeeee" alt="Lorem ipsum">
-				</picture>
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="http://dummy.mirtes.cz/244x164" data-src-retina="http://dummy.mirtes.cz/488x328">
 			</p>
 			<p>
 				<a class="btn btn-primary">Primary button</a><br>
