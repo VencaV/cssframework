@@ -1,6 +1,6 @@
 <?php
 /* Page title, for <title> element and for project overview */
-$templateName = 'Úvodní stránka';
+$templateName = 'Homepage';
 /* Variable for highlighting active menu items */
 $menu = 'uvod';
 /* Project status for project overview; 0 = waiting, 1 = in progress, 2 = finished */

@@ -1,1 +1,1 @@
-Úvodní stránka;index.php;0
+Homepage;index.php;0

@@ -1,6 +1,6 @@
 {
   "name": "just-html-and-css-framework",
-  "version": "2.5.4",
+  "version": "2.6.0",
   "jqueryversion": "1.11.3",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
@@ -18,11 +18,11 @@
     "grunt-contrib-uglify": "~0.6.0",
     "grunt-php": "~1.0.1"
   },
-  "bootstrapversion": "3.3.1",
+  "bootstrapversion": "3.3.4",
   "csspath": "html/project/_ui/css/",
   "jspath": "html/project/_ui/js/",
   "magicfiles": [
-    "<%= pkg.jspath %>modules/modernizr.js"
+    "<%= pkg.magicpath %>modules/modernizr.js"
   ],
   "jsfiles": [
     "<%= pkg.jspath %>modules/jquery.unveil.js",

@@ -7,12 +7,11 @@ if (filesize($projectFile) > 0) {
 $projectName = fread($projectFileName, filesize($projectFile));
 }
 else {
-	$projectName = 'Název projektu';
+	$projectName = 'Project name';
 }
 
 fclose($projectFileName);
 
-date_default_timezone_set('Europe/Prague');
 /* Name of project */
 define ('PROJECT_NAME', trim($projectName));
 /* Path to project */

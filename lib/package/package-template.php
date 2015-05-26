@@ -1,7 +1,11 @@
+<?php
+require_once ( __DIR__ . '/package-settings.php');
+require_once ( __DIR__ . '/../functions.php');
+?>
 {
   "name": "just-html-and-css-framework",
-  "version": "2.6.0",
-  "jqueryversion": "1.11.3",
+  "version": "<?php echo $packageVersion; ?>",
+  "jqueryversion": "<?php echo $jqueryVersion; ?>",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
     "type": "git",
@@ -18,14 +22,17 @@
     "grunt-contrib-uglify": "~0.6.0",
     "grunt-php": "~1.0.1"
   },
-  "bootstrapversion": "3.3.4",
-  "csspath": "../css/",
-  "jspath": "../js/",
+  "bootstrapversion": "<?php echo $bootstrapVersion; ?>",
+  "csspath": "<?php echo $cssPath; ?>",
+  "jspath": "<?php echo $jsPath; ?>",
   "magicfiles": [
-    "<%= pkg.magicpath %>modules/modernizr.js"
+<?php
+getFiles(__DIR__ . '/package-defaults/magicFiles.txt', 'magic', 'r', 'package')
+?>
   ],
   "jsfiles": [
-    "<%= pkg.jspath %>modules/jquery.unveil.js",
-    "<%= pkg.jspath %>modules/main.js"
+<?php
+getFiles(__DIR__ . '/package-defaults/jsFiles.txt', 'js', 'r', 'package')
+?>
   ]
 }

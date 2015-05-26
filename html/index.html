@@ -31,15 +31,17 @@
 		a, a:visited { color: #b80718; text-decoration: underline; }
 		a:hover, a:active { text-decoration: none; }
 		a:focus { outline: 0; }
-		h1,h2,h3,h4 { font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; line-height: 1.1;
+		h1,h2,h3,h4,h5 { font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold;
 			color: #b80718; text-shadow: 1px 1px 0 rgba(0,0,0,.25); }
+		h1,h2,h3,h4 { line-height: 1.1; }
 		h1 { font-size: 3.2em; line-height: 1; }
 		h1 a,
 		a.dont-edit { padding-left: 1ex; font-family: Arial, Helvetica, sans-serif; font-weight: normal; text-transform: none;
 		font-size: small; letter-spacing: 0; text-shadow: none; }
 		h2 { font-size: 2.7em; margin-bottom: 0.5em; }
 		h3 { font-size: 2.7em; line-height: 1; margin-bottom: 0.35em; }
-		h4 { font-size: 1.6em; line-height: 1; margin-bottom: 0.35em; }
+		h4 { font-size: 1.6em; line-height: 1; margin-top: 1em; margin-bottom: 0.35em; }
+		h5 { margin-top: 1em; }
 		p { margin-bottom: 1em; }
 		em { border-bottom: 1px dotted #999; font-style: italic; }
 
@@ -232,7 +234,7 @@
 
 	<div class="container">
 
-		<h1>Název projektu</h1>
+		<h1>Project name</h1>
 		
 	</div>
 	<!-- / container -->
@@ -247,16 +249,16 @@
 
 		<section id="content" role="main">
 
-			<h2>Šablony</h2>
+			<h2>Templates</h2>
 
 			<table class="template-info">
 				<thead>
 					<tr>
 						<th>
-							Název šablony
+							Template name
 						</th>
 						<th>
-							Název souboru
+							File name
 						</th>
 						<th>
 							Status
@@ -264,13 +266,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="index"><td><a href="./project/index.html" class="template-name">Úvodní stránka</a></td><td>index.html</td><td class="status status-0">Čeká</td></tr>
+					<tr class="index"><td><a href="./project/index.html" class="template-name">Homepage</a></td><td>index.html</td><td class="status status-0">Waiting</td></tr>
 				</tbody>
 			</table>
 			<!-- / template-info -->
 
 			<p>
-				<a href="#" class="btn template-browser-show">Procházet všechny šablony</a>
+				<a href="#" class="btn template-browser-show">Browse all templates</a>
 			</p>
 			<div class="template-browser">
 				<div class="template-browser-header"></div>
@@ -278,18 +280,18 @@
 				<a href="#" class="template-browser-close">X</a>
 			</div>
 
-			<h2>Archiv</h2>
+			<h2>Archive</h2>
 
 			<table class="template-info">
 				<thead>
 					<tr>
-						<th>Název archivu</th>
-						<th>Vytvořeno</th>
-						<th>Velikost</th>
+						<th>Archive name</th>
+						<th>Created</th>
+						<th>Size</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr><td><a href="./html.zip">html.zip</a></td><td>26.5.2015 8:42:23</td><td>330.81KB</td></tr>
+					<tr><td><a href="./html.zip">html.zip</a></td><td>26.5.2015 21:08:03</td><td>323.95KB</td></tr>
 				</tbody>
 			</table>
 			<!-- / template-info -->
@@ -333,7 +335,7 @@
 			|
 			<a href="https://github.com/VencaV/wpready" target="_blank">WordPress ready CSS framework</a>
 			<br>
-			Uvolněno pod licencí <a href="https://github.com/VencaV/cssframework/blob/master/LICENSE">MIT</a>
+			Code licensed under <a href="https://github.com/VencaV/cssframework/blob/master/LICENSE">MIT</a>
 		</p>
 
 	</div>

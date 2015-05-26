@@ -1,6 +1,7 @@
 <?php
 /* Load config file with necessary constants */
 require_once ( __DIR__ . '/lib/config.php');
+require_once ( __DIR__ . '/lib/functions.php');
 /* Set correct paths for development and for export */
 $path = PROJECT_PATH;
 if (isset ($export)): $path = ''; endif;
@@ -38,15 +39,17 @@ if (isset ($export)): $path = ''; endif;
 		a, a:visited { color: #b80718; text-decoration: underline; }
 		a:hover, a:active { text-decoration: none; }
 		a:focus { outline: 0; }
-		h1,h2,h3,h4 { font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; line-height: 1.1;
+		h1,h2,h3,h4,h5 { font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold;
 			color: #b80718; text-shadow: 1px 1px 0 rgba(0,0,0,.25); }
+		h1,h2,h3,h4 { line-height: 1.1; }
 		h1 { font-size: 3.2em; line-height: 1; }
 		h1 a,
 		a.dont-edit { padding-left: 1ex; font-family: Arial, Helvetica, sans-serif; font-weight: normal; text-transform: none;
 		font-size: small; letter-spacing: 0; text-shadow: none; }
 		h2 { font-size: 2.7em; margin-bottom: 0.5em; }
 		h3 { font-size: 2.7em; line-height: 1; margin-bottom: 0.35em; }
-		h4 { font-size: 1.6em; line-height: 1; margin-bottom: 0.35em; }
+		h4 { font-size: 1.6em; line-height: 1; margin-top: 1em; margin-bottom: 0.35em; }
+		h5 { margin-top: 1em; }
 		p { margin-bottom: 1em; }
 		em { border-bottom: 1px dotted #999; font-style: italic; }
 
@@ -265,16 +268,16 @@ if (isset ($export)): $path = ''; endif;
 
 		<section id="content" role="main">
 
-			<h2>Šablony</h2>
+			<h2>Templates</h2>
 
 			<table class="template-info">
 				<thead>
 					<tr>
 						<th>
-							Název šablony
+							Template name
 						</th>
 						<th>
-							Název souboru
+							File name
 						</th>
 						<th>
 							Status
@@ -316,13 +319,13 @@ if (isset ($export)): $path = ''; endif;
 		foreach ($statusData['name'] as $name) {
 		switch ($statusData['status'][$i]) {
 			case 0:
-			$status = 'Čeká';
+			$status = 'Waiting';
 			break;
 			case 1:
-			$status = 'Zpracovává se';
+			$status = 'In progress';
 			break;
 			case 2:
-			$status = 'Dokončeno';
+			$status = 'Done';
 			break;
 			}
 
@@ -358,7 +361,7 @@ if (isset ($export)): $path = ''; endif;
 			<!-- / template-info -->
 
 			<p>
-				<a href="#" class="btn template-browser-show">Procházet všechny šablony</a>
+				<a href="#" class="btn template-browser-show">Browse all templates</a>
 			</p>
 			<div class="template-browser">
 				<div class="template-browser-header"></div>
@@ -366,14 +369,14 @@ if (isset ($export)): $path = ''; endif;
 				<a href="#" class="template-browser-close">X</a>
 			</div>
 
-			<h2>Archiv</h2>
+			<h2>Archive</h2>
 
 			<table class="template-info">
 				<thead>
 					<tr>
-						<th>Název archivu</th>
-						<th>Vytvořeno</th>
-						<th>Velikost</th>
+						<th>Archive name</th>
+						<th>Created</th>
+						<th>Size</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -426,7 +429,7 @@ if (isset ($export)): $path = ''; endif;
 			</p>
 			<?php else: ?>
 
-				<h3>Nová šablona</h3>
+				<h3>New template</h3>
 
 				<form method="post" action="<?php echo 'lib/create-template.php'; ?>" class="add-form" data-templates="<?php echo $templates; ?>">
 					<fieldset>
@@ -453,6 +456,42 @@ if (isset ($export)): $path = ''; endif;
 				<br>
 				<form method="post" action="<?php echo 'lib/index.php'; ?>">
 					<input type="submit" value="Update project overview" class="btn">
+				</form>
+
+				<h4>Project setup</h4>
+				<h5>Add JS to bottom of page</h5>
+				<form action="<?php echo '/lib/package/manage-scripts.php'; ?>" method="post">
+					<input type="text" name="file" class="text-field"><br>
+					<input type="submit" value="Add file" class="btn">
+					<input type="hidden" name="action" value="addJs">
+				</form>
+				<h5>Add JS to head</h5>
+				<form action="<?php echo '/lib/package/manage-scripts.php'; ?>" method="post">
+					<input type="text" name="file" class="text-field"><br>
+					<input type="submit" value="Add file" class="btn">
+					<input type="hidden" name="action" value="addMagic">
+				</form>
+				<h5>Remove JS from bottom of page</h5>
+				<form action="<?php echo '/lib/package/manage-scripts.php'; ?>" method="post">
+				<?php
+					$files = getFiles(__DIR__ . '/lib/package/package-defaults/jsFiles.txt', 'js', 'r', 'overview', '');
+					foreach ($files as $file) {
+						echo '<input type="checkbox" checked name="data[' . $file . ']><label for="' . $file . '">' . $file . '</label><br>' . "\n";
+					}
+				?>
+					<input type="submit" value="Remove unchecked" class="btn">
+					<input type="hidden" name="action" value="removeJs">
+				</form>
+				<h5>Remove JS from head</h5>
+				<form action="<?php echo '/lib/package/manage-scripts.php'; ?>" method="post">
+				<?php
+					$files = getFiles(__DIR__ . '/lib/package/package-defaults/magicFiles.txt', 'magic', 'r', 'overview', '');
+					foreach ($files as $file) {
+						echo '<input type="checkbox" checked name="data[' . $file . ']><label for="' . $file . '">' . $file . '</label><br>' . "\n";
+					}
+				?>
+					<input type="submit" value="Remove unchecked" class="btn">
+					<input type="hidden" name="action" value="removeMagic">
 				</form>
 
 			<?php endif; ?>
@@ -484,7 +523,7 @@ if (isset ($export)): $path = ''; endif;
 			|
 			<a href="https://github.com/VencaV/wpready" target="_blank">WordPress ready CSS framework</a>
 			<br>
-			Uvolněno pod licencí <a href="https://github.com/VencaV/cssframework/blob/master/LICENSE">MIT</a>
+			Code licensed under <a href="https://github.com/VencaV/cssframework/blob/master/LICENSE">MIT</a>
 		</p>
 
 	</div>

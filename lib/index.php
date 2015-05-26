@@ -1,5 +1,8 @@
 <?php
 
+// Generate package.json
+require_once (  __DIR__ . '/create-package.php');
+
 if ($handle = opendir( __DIR__ . '/../php')) {
 	$statusFileContent = '';
   while (false !== ($file = readdir($handle))) {
