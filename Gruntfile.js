@@ -48,6 +48,15 @@ grunt.initConfig({
 					options: {
 					livereload: 1337
 				}
+			},
+			grunt: {
+				files: [
+					'package.json'
+				],
+				tasks: ['compile-js'],
+					options: {
+					livereload: 1337
+				}
 			}
 		},
 		php: {

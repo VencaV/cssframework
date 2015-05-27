@@ -27,7 +27,7 @@ require_once ( __DIR__ . '/../functions.php');
   "jspath": "<?php echo $jsPath; ?>",
   "magicfiles": [
 <?php
-getFiles(__DIR__ . '/package-defaults/magicFiles.txt', 'magic', 'r', 'package')
+getFiles(__DIR__ . '/package-defaults/magicFiles.txt', 'js', 'r', 'package')
 ?>
   ],
   "jsfiles": [

@@ -1,6 +1,6 @@
 {
   "name": "just-html-and-css-framework",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "jqueryversion": "1.11.3",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
@@ -22,7 +22,7 @@
   "csspath": "html/project/_ui/css/",
   "jspath": "html/project/_ui/js/",
   "magicfiles": [
-    "<%= pkg.magicpath %>modules/modernizr.js"
+    "<%= pkg.jspath %>modules/modernizr.js"
   ],
   "jsfiles": [
     "<%= pkg.jspath %>modules/jquery.unveil.js",
