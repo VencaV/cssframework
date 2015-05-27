@@ -461,13 +461,13 @@ if (isset ($export)): $path = ''; endif;
 				<h4>Project setup</h4>
 				<h5>Add JS to bottom of page</h5>
 				<form action="<?php echo '/lib/package/manage-scripts.php'; ?>" method="post">
-					<input type="text" name="file" class="text-field"><br>
+					<input type="text" name="file" class="text-field" required><br>
 					<input type="submit" value="Add file" class="btn">
 					<input type="hidden" name="action" value="addJs">
 				</form>
 				<h5>Add JS to head</h5>
 				<form action="<?php echo '/lib/package/manage-scripts.php'; ?>" method="post">
-					<input type="text" name="file" class="text-field"><br>
+					<input type="text" name="file" class="text-field" required><br>
 					<input type="submit" value="Add file" class="btn">
 					<input type="hidden" name="action" value="addMagic">
 				</form>
