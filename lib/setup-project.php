@@ -3,7 +3,7 @@
 if (isset($_POST['project-name'])) {
 
 	if ($_POST['project-name'] !== '') {
-	$projectFile = __DIR__ . '/../php/config/project.txt';
+	$projectFile = __DIR__ . '/config/project.txt';
 	$handle = fopen($projectFile, 'w+');
 	fwrite($handle, $_POST['project-name']);
 	fclose($handle);

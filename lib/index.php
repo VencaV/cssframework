@@ -24,7 +24,7 @@ if ($handle = opendir( __DIR__ . '/../php')) {
   closedir($handle);
 
 	/* Write actual template status and names */
-	$statusFileName = __DIR__ . '/../php/config/status.txt';
+	$statusFileName = __DIR__ . '/config/status.txt';
 	$statusFile = fopen($statusFileName, 'w+');
 	fwrite($statusFile, $statusFileContent);
 	fclose($statusFile);

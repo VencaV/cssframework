@@ -293,7 +293,7 @@ if (isset ($export)): $path = ''; endif;
 		$template['title'] = '';
 		$template['name'] = '';
 		$template['status'] = '';
-		$statusFileName = __DIR__ . '/php/config/status.txt';
+		$statusFileName = __DIR__ . '/lib/config/status.txt';
 		$handle = fopen($statusFileName, 'r');
 		if ($handle) {
 		    while (($statusLine = fgets($handle, 4096)) !== false) {

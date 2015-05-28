@@ -1,7 +1,7 @@
 <?php
 
 $projectName = '';
-$projectFile = __DIR__ . '/../php/config/project.txt';
+$projectFile = __DIR__ . '/config/project.txt';
 $projectFileName = fopen($projectFile, 'r');
 if (filesize($projectFile) > 0) {
 $projectName = fread($projectFileName, filesize($projectFile));
