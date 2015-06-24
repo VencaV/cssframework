@@ -1,6 +1,6 @@
 {
   "name": "just-html-and-css-framework",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "jqueryversion": "1.11.3",
   "author": "Václav Vracovský, http://vracovsky.cz/",
   "repository": {
@@ -18,7 +18,7 @@
     "grunt-contrib-uglify": "~0.6.0",
     "grunt-php": "~1.0.1"
   },
-  "bootstrapversion": "3.3.4",
+  "bootstrapversion": "3.3.5",
   "csspath": "../css/",
   "jspath": "../js/",
   "magicfiles": [
